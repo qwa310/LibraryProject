@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Management System</title>
+</head>
+<body>
+    <h1>로그인</h1>
+    <form th:action="@{/member/login}" method="POST">
+        <div>
+            <label for="email">Email : </label>
+            <input type="text" name="email" id="email" ><br>
+            <label for="pwd">Password : </label>
+            <input type="password" name="pwd" id="pwd" >
+        </div>
+        <button type="submit">등록</button>
+    </form>
+</body>
+</html>

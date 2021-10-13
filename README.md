@@ -1,2 +1,0 @@
-# LibraryProject
-Library Management System

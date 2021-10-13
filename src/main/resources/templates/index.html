@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Library Management System</title>
 </head>
 <body>
+    <h1>LMS Index Page</h1>
+    <div sec:authorize="isAnonymous()">
+        <a sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a><br>
+        <a sec:authorize="isAnonymous()" th:href="@{/member/new}">회원 가입</a><br>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <span sec:authentication="name"></span>님 환영합니다~<br>
+        <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a><br>
+    </div>
 
 </body>
 </html>
