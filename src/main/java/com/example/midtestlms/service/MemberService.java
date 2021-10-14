@@ -22,16 +22,23 @@ import java.util.Optional;
 @Service
 public class MemberService implements UserDetailsService{
     private final MemberMapper memberMapper;
-
+    // 의존성 주입
     @Autowired
     public MemberService(MemberMapper memberMapper) {
         this.memberMapper = memberMapper;
     }
 
+    // 전체 회원 조회
     public List<Member> findMembers(){
         return memberMapper.findAll();
     }
 
+    // 이메일로 회원 조회
+    public Member findMember(String email){
+        return memberMapper.findByEmail(email).orElseThrow();
+    }
+
+    // 회원 가입
     @Transactional
     public Long joinMember(MemberDto memberDto) {
         // 비밀번호 암호화
@@ -59,6 +66,7 @@ public class MemberService implements UserDetailsService{
 //        return memberMapper.saveAdmin(memberDto.toEntity());
 //    }
 
+    // Spring Security 가 제공하는 로그인 처리 로직.
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Member> memberWrapper = memberMapper.findByEmail(email);

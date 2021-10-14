@@ -13,7 +13,8 @@
     </div>
 
     <div sec:authorize="isAuthenticated()">
-        <span sec:authentication="name"></span>님 환영합니다~<br>
+<!--        <span sec:authentication="name"></span>님 환영합니다~<br>-->
+        <span th:text ="${member.name}"></span>님 환영합니다~~<br>
         <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a><br>
     </div>
 
