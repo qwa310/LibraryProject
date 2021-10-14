@@ -39,6 +39,12 @@ public class MemberService implements UserDetailsService{
     }
 
     // 회원 가입
+
+    // 유저 조회
+    public Member findMember(){
+        return memberMapper.findById();
+    }
+
     @Transactional
     public Long joinMember(MemberDto memberDto) {
         // 비밀번호 암호화

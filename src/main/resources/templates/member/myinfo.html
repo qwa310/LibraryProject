@@ -1,10 +1,113 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Library Management System</title>
+    <link th:href="@{/css/mypage.css/}" rel="stylesheet" type="text/css" media="screen">
+    <title>Admin Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  <!-- jquery library 임포트 -->
+    <script type="text/javascript" th:src="@{/js/mypage.js/}"></script>
 </head>
 <body>
-    <h1>My Info</h1>
+<h1>JSTL MyPage</h1>
+<div class="container">
+    <ul class="tabs">
+        <li class="tab-link current" data-tab="tab-1">회원정보수정</li>
+        <li class="tab-link" data-tab="tab-2">대여정보</li>
+        <li class="tab-link" data-tab="tab-3">연체 내역 조회</li>
+        <li class="tab-link" data-tab="tab-4">알람 신청 내역 조회</li>
+    </ul>
+    <div id="tab-1" class="tab-content current">
+        <form action="/">
+            <label> 등급 </label><br>
+            <label>email:</label>
+            <input type="text" name="myEmail" th:value="${myinfo.email}"><br>
+            <label>비밀번호:</label>
+            <input type="password" name="myPwd" th:value="${myinfo.pwd}"><br>
+            <label>이름:</label>
+            <input type="text" name="myName" th:value="${myinfo.name}"><br>
+            <label>주민등록번호:</label>
+            <input type="text" name="myPid" th:value="${myinfo.pid}"><br>
+            <label>휴대폰번호:</label>
+            <input type="text" name="myPhone" th:value="${myinfo.phone}"><br>
+
+            <input type="button" value="정보수정" >
+        </form>
+    </div>
+    <div id="tab-2" class="tab-content">
+        <table>
+            <tr>
+                <th>idx</th>  <!-- r_id 대여 인덱스 -->
+                <th>책id</th>
+                <th>책 대여 유저ID</th>
+                <th>ISBN</th>
+                <th>제목</th>
+                <th>저자</th>
+                <th>출판사</th>
+                <th>책 대여 날짜</th>
+                <th>책 반납 예정일</th>
+                <th>책 반납 여부</th>
+                <th>책 반납 신청</th>
+                <th>책 연장 신청</th>
+                <th>책 연장 횟수</th>
+            </tr>
+            <tr th:each="rantal_table : ${rentalList}">
+                <td name="r_id" th:text="${rantal_table.r_id}">
+
+                </td>
+                <td name="b_id" th:text="${rantal_table.b_id}">
+
+                </td>
+                <td name="m_id" th:text="${rantal_table.m_id}">
+                    <h1>3</h1>
+                </td>
+                <td name="isbn" th:text="${rantal_table.isbn}">
+                    <h1>4</h1>
+                </td>
+                <td name="b_title" th:text="${rantal_table.b_title}">
+                    <h1>5</h1>
+                </td>
+                <td name="b_author" th:text="${rantal_table.b_author}">
+                    <h1>6</h1>
+                </td>
+                <td name="b_publisher" th:text="${rantal_table.b_publisher}">
+                    <h1>7</h1>
+                </td>
+                <td name="rent_date" th:text="${rantal_table.rent_date}">
+                    <h1>8</h1>
+                </td>
+                <td name="due_return_date" th:text="${rantal_table.due_return_date}">
+                    <h1>9</h1>
+                </td>
+                <td name="return_status" th:text="${rantal_table.return_status}">
+                    <h1>10</h1>
+                </td>
+                <td>
+                    <div th:if="${rantal_table.return_status} == 0">
+                        <button>반납신청</button>
+                    </div>
+                </td>
+                <td>
+                    <div th:if="${rantal_table.return_status} == 0">
+                        <div th:if="${rantal_table.ext_num} <= 3">
+                            <button>연장신청</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div th:text="${rantal_table.ext_num}"></div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div id="tab-3" class="tab-content">
+
+    </div>
+    <div id="tab-4" class="tab-content">
+
+    </div>
+</div>
+
+
 </body>
 </html>

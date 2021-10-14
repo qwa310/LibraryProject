@@ -1,0 +1,45 @@
+body{
+    margin-top: 50px;
+    font-family: 'Trebuchet MS', serif;
+    line-height: 1.6
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+ul.tabs{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+ul.tabs li{
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+ul.tabs li.current{
+    background: #ededed;
+    color: #222;
+}
+
+.tab-content{
+    display: none;
+    background: #ededed;
+    padding: 15px;
+    height: 500px;
+}
+
+.tab-content.current{
+    display: inherit;
+}
