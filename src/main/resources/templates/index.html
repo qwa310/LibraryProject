@@ -4,6 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Library Management System</title>
+    <style type="text/css">
+	a {
+		text-decoration: none;
+		color: black;
+	} 
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	const contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
+	$('#searchBtn button').on('click',function(){
+		$("#searchBookList *").remove();
+		let searchText = $('.a').val();
+		let bookCon = $('#bookcon').val();
+		console.log(searchText != "" && bookCon == "none");
+		console.log( bookCon == "none");
+		console.log( searchText != "" );
+		if(bookCon == "none"){
+			alert("항목을 골라주세요")
+			return;
+		}
+	    searchText != "" ?
+			$.get(contextPath + "/showBookList/"+searchText+"/"+bookCon,
+					function(json){
+						let dataLength = json.length;
+						if(dataLength >= 1){
+							let sCont = "<tr><th>제목</th><th>장르</th><th>출판사</th><th>작가</th></tr>";
+							for(i = 0; i < dataLength; i++){
+								sCont += '<tr class = "pickBook'+i+'" value = '+$.trim(json[i].isbn)+'>'
+								sCont += "<td><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_title +"</a></td>"
+								sCont += "<td><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].c_name +"</a></td>"
+								sCont += "<td><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_publisher +"</a></td>"
+								sCont += "<td><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_author +"</a></td>"
+								sCont += "</tr>"
+							}             	
+							$("#searchBookList").append(sCont);
+						}
+			})	
+		: alert("검색 값을 입력주세요");
+	})
+	
+})
+</script>
 </head>
 <body>
     <h1>LMS Index Page</h1>
@@ -11,6 +54,19 @@
         <a sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a><br>
         <a sec:authorize="isAnonymous()" th:href="@{/member/new}">회원 가입</a><br>
     </div>
+
+	<div id = "searchBtn">
+		<select id="bookcon" name="bookcon">
+		    <option value="none">선택</option>
+		    <option value="b_publisher">출판사</option>
+		    <option value="b_title">제목</option>
+		    <option value="b_author">글쓴이</option>
+		    <option value="c_name">장르</option>
+		</select>
+		<input type="text" class="a"> 
+		<button>검색</button>
+	</div>
+	<table id = "searchBookList"></table>
 
     <div sec:authorize="isAuthenticated()">
 <!--        <span sec:authentication="name"></span>님 환영합니다~<br>-->
