@@ -29,5 +29,5 @@ public interface BookMapper {
     @Select(" select isbn,b_title, b_publisher, b_pdate, b_author, c_name\r\n"
     		+ "  from book_info b join book_category c on b.c_id = c.c_id\r\n"
     		+ " where isbn = #{isbn}")
-    List<BookSearchInfo> bookDetails(@Param("isbn") String isbn);
+    BookSearchInfo bookDetails(@Param("isbn") String isbn);
 }

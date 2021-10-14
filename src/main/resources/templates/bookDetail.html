@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>책 상세 페이지</title>
+<meta charset="UTF-8">
+<title>책 상세 페이지</title>
 </head>
 <body>
-<h2 th:text = "${bList}"></h2> 
-<h2 th:text = "${bDetails}"></h2> 
+	<div>
+		<div>책 제목 :   <span th:text="${bDetails.b_title}"></span></div>
+		<div>작가 :     <span th:text="${bDetails.b_author}"></span></div>
+		<div>장르 :     <span th:text="${bDetails.c_name}"></span></div>
+		<div>출판사 :   <span th:text="${bDetails.b_publisher}"></span> </div>
+		<div>출간 날짜 : <span th:text="${bDetails.b_pdate}"></span> </div> 
+	</div>
+	
+	<table class="tb_col">
+		<tr>
+			<th>ID</th>
+			<th>ISBN</th>
+			<th>대여</th>
+		</tr>
+		<tr th:each="bList : ${bList}">
+			<td th:text="${bList.b_id}"></td>
+			<td th:text="${bList.isbn}"></td>
+			<td th:text="${bList.b_status} == 0 ? 가능 : 불가"></td>
+		</tr>
+	</table>
+
 </body>
 </html>

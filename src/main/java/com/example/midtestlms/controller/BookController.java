@@ -20,21 +20,12 @@ public class BookController {
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
-
-//    @GetMapping("/")
-//    public String index(Model model) {
-//    	List<BookSearchInfo> bList = bookService.bookList();
-//    	List<BookCategory> bCategory = bookService.bookCategory();
-//    	model.addAttribute("bList", bList);
-//    	model.addAttribute("bCategory", bCategory);
-//        return "index";
-//    }
     
     @GetMapping("/bookDetail")
     public ModelAndView bookDetail(@RequestParam(required = false) String isbn) {
     	System.out.println(isbn);
     	List<Book> bList = bookService.bookDetailList(isbn);
-    	List<BookSearchInfo> bDetails = bookService.bookDetails(isbn);
+    	BookSearchInfo bDetails = bookService.bookDetails(isbn);
     	ModelAndView mav = new ModelAndView("bookDetail", "bList", bList);
     	mav.addObject( "bDetails", bDetails);
     	return mav;

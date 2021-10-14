@@ -36,7 +36,7 @@ public class BookService {
 		return bookMapper.bookDetailList(isbn);
 	}
 	
-	public List<BookSearchInfo> bookDetails(String isbn){
+	public BookSearchInfo bookDetails(String isbn){
 		return bookMapper.bookDetails(isbn);
 	}
 }
