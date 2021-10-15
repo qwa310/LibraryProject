@@ -44,7 +44,6 @@ public class RestBookController {
 	@GetMapping("/bookDetail/{isbn}")
 	public ResponseEntity<Object> showBookDetail(@PathVariable String isbn) {
 		List<Book> bDetail = service.bookDetailList(isbn);
-		
 		return ResponseEntity.ok(bDetail);
 	}
 

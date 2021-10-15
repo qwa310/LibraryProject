@@ -17,8 +17,7 @@
 $(function(){
 	const contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 	$('#a').on('click',function(){
-		
-		$("#searchBookList pickBook").remove();
+		$("#searchBookList *").empty();
 		let searchText = $('.a').val();
 		let bookCon = $('#bookcon').val();
 		console.log(searchText != "" && bookCon == "none");
@@ -75,15 +74,30 @@ $(function(){
 		    				<option value="b_author">글쓴이</option>
 		    				<option value="c_name">장르</option>
 					    </select>
-					    
 					</div>
 	    			<input type="text" class="a">			
 	    			<a id="a"><img th:src="@{/css/images/icon.png}" alt=""></a>
 	    		</div>
 	    	</div>
 	   	</div>
-	   	<div id="searchBookList"></div>
-	    
+	   	<div id="searchBookList">
+		<div id = "firstTable">
+			<div>
+				<div>출판사</div>
+				<div>제목</div>
+				<div>글쓴이</div>
+				<div>장르</div>
+			</div>
+			<div th:each="book : ${bookList}">
+			<a th:href="@{/book/bookDetail(isbn=${book.isbn})}">
+				<span th:text="${book.b_title}"></span>
+				<span th:text="${book.b_publisher}"></span>
+				<span th:text="${book.b_author}"></span>
+				<span th:text="${book.c_name}"></span>
+			</a>
+			</div>
+		</div>
+	</div>
 	</body>
 	
 	<!-- footer.html -->
