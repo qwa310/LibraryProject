@@ -1,6 +1,7 @@
 package com.example.midtestlms.mapper;
 
 import com.example.midtestlms.domain.Member;
+import com.example.midtestlms.dto.MemberDto;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -21,6 +22,13 @@ public interface MemberMapper {
     // mypage 회원정보 조회
     @Select("select * from member where m_id = 12")
     Member findById();
+
+    // mypage 회원정보 수정
+    @Update("update lms.member set \n" +
+            "pwd = #{pwd},\n" +
+            "phone = #{phone}\n" +
+            "where m_id = 12")
+    Long updateInfo(@Param("pwd") final String pwd, @Param("phone") final String phone);
 
 
     // 회원 가입

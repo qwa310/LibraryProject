@@ -26,4 +26,10 @@ public class Member {
         this.rentable_date = rentable_date;
         this.auth = auth;
     }
+    @Builder
+    public Member(String pwd, String phone) {
+        this.pwd = pwd;
+        this.phone = phone;
+    }
+
 }

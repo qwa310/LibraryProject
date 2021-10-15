@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+// 대여 DTO
 public class RentalDto {
     private int r_id;  // 대여 인덱스
     private int b_id;  // 책 인덱스
@@ -21,6 +22,7 @@ public class RentalDto {
     private String b_title;
     private String b_author;
     private String b_publisher;
+    private int cnt_date;
 
     public Rental toEntity(){
         return Rental.builder()
@@ -36,11 +38,12 @@ public class RentalDto {
                 .b_title(b_title)
                 .b_author(b_author)
                 .b_publisher(b_publisher)
+                .cnt_date(cnt_date)
                 .build();
     }
 
     @Builder
-    public RentalDto(int r_id, int b_id, int m_id, String rent_date, int return_status, int ext_num, String due_return_date, String real_return_date, String isbn, String b_author, String b_publisher) {
+    public RentalDto(int r_id, int b_id, int m_id, String rent_date, int return_status, int ext_num, String due_return_date, String real_return_date, String isbn, String b_author, String b_publisher, int cnt_date) {
         this.r_id = r_id;
         this.b_id = b_id;
         this.m_id = m_id;
@@ -52,5 +55,6 @@ public class RentalDto {
         this.isbn = isbn;
         this.b_author = b_author;
         this.b_publisher = b_publisher;
+        this.cnt_date = cnt_date;
     }
 }
