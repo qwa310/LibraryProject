@@ -14,6 +14,7 @@ public class BookSearchInfo {
     private String b_publisher;
     private String b_author;
     private Date b_pdate;
+    private String image;
 
     @Builder
     public BookSearchInfo(String b_title, String c_name, String b_publisher, String b_author) {

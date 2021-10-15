@@ -39,4 +39,8 @@ public class BookService {
 	public BookSearchInfo bookDetails(String isbn){
 		return bookMapper.bookDetails(isbn);
 	}
+	
+	public int extensionBook(int r_id) {
+		return bookMapper.extensionBook(r_id);
+	}
 }

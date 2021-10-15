@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.midtestlms.domain.Book;
@@ -46,4 +48,10 @@ public class RestBookController {
 		return ResponseEntity.ok(bDetail);
 	}
 
+	@PostMapping("/extensionBook/")
+	public ResponseEntity<Object> extensionBook(@RequestBody int r_id) {
+		int extension = service.extensionBook(r_id);
+		return ResponseEntity.ok(extension);
+	}
+	
 }

@@ -25,19 +25,27 @@ $(function(){
 			alert("항목을 골라주세요")
 			return;
 		}
+		let arr = ["제목","장르","출판사","작가",]
 	    searchText != "" ?
 			$.get(contextPath + "/showBookList/"+searchText+"/"+bookCon,
 					function(json){
+						console.log(json)
 						let dataLength = json.length;
 						if(dataLength >= 1){
-							let sCont = "<tr><th>제목</th><th>장르</th><th>출판사</th><th>작가</th></tr>";
+							let	sCont = "<div>"
+								arr.map((v)=>{
+									sCont += "<div class ='list_th'>"+v+"</div>"	
+								})
+								sCont +=	"</div>"
 							for(i = 0; i < dataLength; i++){
-								sCont += '<tr class = "pickBook'+i+'" value = '+$.trim(json[i].isbn)+'>'
-								sCont += "<td><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_title +"</a></td>"
-								sCont += "<td><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].c_name +"</a></td>"
-								sCont += "<td><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_publisher +"</a></td>"
-								sCont += "<td><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_author +"</a></td>"
-								sCont += "</tr>"
+								sCont += '<div class = "pickBook" value = '+$.trim(json[i].isbn)+'>'
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''><img alt='책사진' src="+json[i].image+"></a></div>"
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''><img></a></td>"
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_title +"</a></td>"
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].c_name +"</a></td>"
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_publisher +"</a></td>"
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_author +"</a></td>"
+								sCont += "</div>"
 							}             	
 							$("#searchBookList").append(sCont);
 						}
@@ -54,7 +62,6 @@ $(function(){
         <a sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a><br>
         <a sec:authorize="isAnonymous()" th:href="@{/member/new}">회원 가입</a><br>
     </div>
-
 	<div id = "searchBtn">
 		<select id="bookcon" name="bookcon">
 		    <option value="none">선택</option>
@@ -66,13 +73,14 @@ $(function(){
 		<input type="text" class="a"> 
 		<button>검색</button>
 	</div>
-	<table id = "searchBookList"></table>
+	<div id="searchBookList"></div>
 
     <div sec:authorize="isAuthenticated()">
 <!--        <span sec:authentication="name"></span>님 환영합니다~<br>-->
         <span th:text ="${member.name}"></span>님 환영합니다~~<br>
         <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a><br>
     </div>
-
+    
+    <button onclick="">연장하기</button>
 </body>
 </html>
