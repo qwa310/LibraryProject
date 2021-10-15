@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>더조니도서관</title>
+	    <link rel="shortcut icon" th:href="@{/css/favicon.ico}">
+	    
+	    <!-- config.html
+	    <th:block th:replace="fragments/config::configFragment"></th:block> -->
+	    <link rel="stylesheet" th:href="@{/css/index.css}">
+	
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	const contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
+	$('#a').on('click',function(){
+		
+		$("#searchBookList pickBook").remove();
+		let searchText = $('.a').val();
+		let bookCon = $('#bookcon').val();
+		console.log(searchText != "" && bookCon == "none");
+		console.log( bookCon == "none");
+		console.log( searchText != "" );
+		
+		if(bookCon == "none"){
+			alert("항목을 골라주세요")
+			return;
+		}
+		let arr = ["제목","장르","출판사","작가",]
+	    searchText != "" ?
+			$.get(contextPath + "/showBookList/"+searchText+"/"+bookCon,
+					function(json){
+						console.log(json)
+						let dataLength = json.length;
+						if(dataLength >= 1){
+							let	sCont = "<div>"
+								arr.map((v)=>{
+									sCont += "<div class ='list_th'>"+v+"</div>"	
+								})
+								sCont += "</div>"
+							for(i = 0; i < dataLength; i++){
+								sCont += "<a href='bookDetail?isbn="+json[i].isbn+"'><div class='pickBook' value="+$.trim(json[i].isbn)+">"
+								sCont += "	"+ json[i].b_title +""
+								sCont += "	"+ json[i].c_name +""
+								sCont += "	"+ json[i].b_publisher +""
+								sCont += "	"+ json[i].b_author +""
+								"</div></a>"
+							}             	
+							$("#searchBookList").append(sCont);
+						}
+			})	
+		: alert("검색 값을 입력주세요");
+	})
+	
+})
+</script>
+</head>
+	<!-- header.html -->
+	<header th:replace="fragments/header::headerFragment"></header>
+	
+	<!-- <body layout:fragment="content"> layout.html 사용의 경우 -->
+	<body layout:fragment="content">
+	  	<div class="search_zone">
+	    	<div class="transparent">
+	    		<div class="search">
+	    			<span id="search">통합자료검색</span>
+	    			<div id = "searchBtn" class="selectBox">
+					    <select id="bookcon" name="bookcon" class="select">
+					      	<option value="none">선택</option>
+		    				<option value="b_publisher">출판사</option>
+		   					<option value="b_title">제목</option>
+		    				<option value="b_author">글쓴이</option>
+		    				<option value="c_name">장르</option>
+					    </select>
+					    
+					</div>
+	    			<input type="text" class="a">			
+	    			<a id="a"><img th:src="@{/css/images/icon.png}" alt=""></a>
+	    		</div>
+	    	</div>
+	   	</div>
+	   	<div id="searchBookList"></div>
+	    
+	</body>
+	
+	<!-- footer.html -->
+	<footer th:replace="fragments/footer::footerFragment"></footer>
+</html>

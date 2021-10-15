@@ -32,4 +32,12 @@ public class BookController {
     	return mav;
     }
     
+    @GetMapping("/book/bookSearch")
+    public String bookSearch() {
+    	ModelAndView mav = new ModelAndView("bookSearch");
+    	System.out.println(1111);
+    	return "book/bookSearch";
+    }
+    
+    
 }
