@@ -39,6 +39,18 @@ public class MemberService implements UserDetailsService{
     }
 
     // 회원 가입
+
+    // 유저 조회
+    public Member findMember(){
+        return memberMapper.findById();
+    }
+
+    // 유저 정보 수정
+    public Long updateMember(Member member, String pwd, String phone){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return memberMapper.updateInfo(passwordEncoder.encode(pwd), phone);
+    }
+
     @Transactional
     public Long joinMember(MemberDto memberDto) {
         // 비밀번호 암호화

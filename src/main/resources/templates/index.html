@@ -4,6 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Library Management System</title>
+    <style type="text/css">
+	a {
+		text-decoration: none;
+		color: black;
+	} 
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	const contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
+	$('#searchBtn button').on('click',function(){
+		$("#searchBookList *").remove();
+		let searchText = $('.a').val();
+		let bookCon = $('#bookcon').val();
+		console.log(searchText != "" && bookCon == "none");
+		console.log( bookCon == "none");
+		console.log( searchText != "" );
+		if(bookCon == "none"){
+			alert("항목을 골라주세요")
+			return;
+		}
+		let arr = ["제목","장르","출판사","작가",]
+	    searchText != "" ?
+			$.get(contextPath + "/showBookList/"+searchText+"/"+bookCon,
+					function(json){
+						console.log(json)
+						let dataLength = json.length;
+						if(dataLength >= 1){
+							let	sCont = "<div>"
+								arr.map((v)=>{
+									sCont += "<div class ='list_th'>"+v+"</div>"	
+								})
+								sCont +=	"</div>"
+							for(i = 0; i < dataLength; i++){
+								sCont += '<div class = "pickBook" value = '+$.trim(json[i].isbn)+'>'
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''><img alt='책사진' src="+json[i].image+"></a></div>"
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''><img></a></td>"
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_title +"</a></td>"
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].c_name +"</a></td>"
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_publisher +"</a></td>"
+								sCont += "	<div><a href='bookDetail?isbn="+json[i].isbn+"''>"+ json[i].b_author +"</a></td>"
+								sCont += "</div>"
+							}             	
+							$("#searchBookList").append(sCont);
+						}
+			})	
+		: alert("검색 값을 입력주세요");
+	})
+	
+})
+</script>
 </head>
 <body>
     <h1>LMS Index Page</h1>
@@ -11,12 +62,25 @@
         <a sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a><br>
         <a sec:authorize="isAnonymous()" th:href="@{/member/new}">회원 가입</a><br>
     </div>
+	<div id = "searchBtn">
+		<select id="bookcon" name="bookcon">
+		    <option value="none">선택</option>
+		    <option value="b_publisher">출판사</option>
+		    <option value="b_title">제목</option>
+		    <option value="b_author">글쓴이</option>
+		    <option value="c_name">장르</option>
+		</select>
+		<input type="text" class="a"> 
+		<button>검색</button>
+	</div>
+	<div id="searchBookList"></div>
 
     <div sec:authorize="isAuthenticated()">
 <!--        <span sec:authentication="name"></span>님 환영합니다~<br>-->
         <span th:text ="${member.name}"></span>님 환영합니다~~<br>
         <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a><br>
     </div>
-
+    
+    <button onclick="">연장하기</button>
 </body>
 </html>
