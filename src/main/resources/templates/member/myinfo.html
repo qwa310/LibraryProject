@@ -134,14 +134,44 @@
                 <td th:text="${overdue_table.b_publisher}">
 
                 </td>
-                <td th:text="${overdue_table.cnt_date}+일">
+                <td th:text="${overdue_table.cnt_date} + '  일'">
 
                 </td>
             </tr>
         </table>
     </div>
     <div id="tab-4" class="tab-content">
+        <table>
+            <tr>
+                <th>idx</th>
+                <th>책id</th>
+                <th>ISBN</th>
+                <th>제목</th>
+                <th>알람 전송 여부</th>
+            </tr>
+            <tr th:each="notification_table : ${notificationList}">
+                <td th:text="${notification_table.n_id}">
 
+                </td>
+                <td th:text="${notification_table.b_id}">
+
+                </td>
+                <td th:text="${notification_table.isbn}">
+
+                </td>
+                <td th:text="${notification_table.b_title}">
+
+                </td>
+                <td>
+                    <div th:if="${notification_table.resp_date} == null">
+                        <div>발송 전</div>
+                    </div>
+                    <div th:if="${notification_table.resp_date} != null">
+                        <div>발송 완료</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
 

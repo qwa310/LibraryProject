@@ -1,9 +1,11 @@
 package com.example.midtestlms.controller;
 
+import com.example.midtestlms.domain.Notification;
 import com.example.midtestlms.domain.Overdue;
 import com.example.midtestlms.domain.Rental;
 import com.example.midtestlms.domain.Member;
 import com.example.midtestlms.dto.MemberDto;
+import com.example.midtestlms.service.NotificationService;
 import com.example.midtestlms.service.OverdueService;
 import com.example.midtestlms.service.RentalService;
 import com.example.midtestlms.service.MemberService;
@@ -21,14 +23,16 @@ public class MemberController {
     private final MemberService memberService;
     private final RentalService rentalService;
     private final OverdueService overdueService;
+    private final NotificationService notificationService;
     private MemberDto memberDto;
 
     // 의존성 주입
     @Autowired
-    public MemberController(MemberService memberService, RentalService rentalService, OverdueService overdueService) {
+    public MemberController(MemberService memberService, RentalService rentalService, OverdueService overdueService, NotificationService notificationService) {
         this.memberService = memberService;
         this.rentalService = rentalService;
         this.overdueService = overdueService;
+        this.notificationService = notificationService;
     }
 
     // 회원가입 페이지
@@ -89,11 +93,13 @@ public class MemberController {
         Member members = memberService.findMember();
         List<Rental> rentalList = rentalService.findRental();
         List<Overdue> overdueList = overdueService.findOverdue();
+        List<Notification> notificationList = notificationService.findNotification();
 
         System.out.println("총 대여 책 개수 : "+rentalList.size());
         model.addAttribute("myinfo",members);
         model.addAttribute("rentalList",rentalList);
         model.addAttribute("overdueList",overdueList);
+        model.addAttribute("notificationList", notificationList);
         return "member/myinfo";
     }
 
@@ -104,6 +110,7 @@ public class MemberController {
         System.out.println("정보 수정 완료");
         return "redirect:/member/info";
     }
+
 
     // 어드민 페이지
     @GetMapping("/admin")
