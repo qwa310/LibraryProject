@@ -1,21 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Library Management System</title>
-</head>
-<body>
-    <h1>LMS Index Page</h1>
-    <div sec:authorize="isAnonymous()">
-        <a sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a><br>
-        <a sec:authorize="isAnonymous()" th:href="@{/member/new}">회원 가입</a><br>
-    </div>
-
-    <div sec:authorize="isAuthenticated()">
-        <span sec:authentication="name"></span>님 환영합니다~<br>
-        <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a><br>
-    </div>
-
-</body>
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>더조니도서관</title>
+	    <link rel="shortcut icon" th:href="@{/css/favicon.ico}">
+	    
+	    <!-- config.html
+	    <th:block th:replace="fragments/config::configFragment"></th:block> -->
+	    <link rel="stylesheet" th:href="@{/css/index.css}">
+	</head>
+	
+	<!-- header.html -->
+	<header th:replace="fragments/header::headerFragment"></header>
+	
+	
+	<!-- <body layout:fragment="content"> layout.html 사용의 경우 -->
+	<body layout:fragment="content">
+	  	<div class="search_zone">
+	    	<div class="transparent">
+	    		<div class="search">
+	    			<span id="search">통합자료검색</span>
+	    			<div class="selectBox">
+					    <select name="fruits" class="select">
+					      	<option selected>선택</option>
+					      	<option value="apple">apple</option>
+					      	<option value="orange">orange</option>
+					      	<option value="grape">grape</option>
+					      	<option value="melon">melon</option>
+					    </select>
+					</div>
+	    			<input type="text" name="" value="">
+	    			<a th:href="@{/}"><img th:src="@{/css/images/icon.png}" alt=""></a>
+	    		</div>
+	    	</div>
+	   	</div>
+	    <div class="section">
+	    	 <div class="notice">
+	    	 <span>공지사항</span>
+	    	 <ul>
+	    	 	<li>이야기가 있는 코딩</li>
+	    	 	<li>부산인문학 줌인 저자초청 특강</li>
+	    	 	<li>더조니도서관 자원봉사자 모집</li>
+	    	 	<li>금요일 저녁(12.18. 6시) 김더존 신예작가를...</li>
+	    	 	<li>작은도서관 발전방안 포럼 안내</li>
+	    	 </ul>
+	    	</div>
+	    	<div class="news">
+	    	<span>도서관소식</span>
+	    	</div>
+	    	<div class="new">
+	    	<span>신작도서</span>
+	    	</div>
+	    </div>
+		<div class="empty"></div>
+	</body>
+	
+	<!-- footer.html -->
+	<footer th:replace="fragments/footer::footerFragment"></footer>
+	
 </html>
