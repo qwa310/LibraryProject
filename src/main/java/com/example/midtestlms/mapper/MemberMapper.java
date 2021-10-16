@@ -1,11 +1,16 @@
 package com.example.midtestlms.mapper;
 
-import com.example.midtestlms.domain.Member;
-import com.example.midtestlms.dto.MemberDto;
-import org.apache.ibatis.annotations.*;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import com.example.midtestlms.domain.Member;
 
 @Mapper
 public interface MemberMapper {
@@ -19,20 +24,20 @@ public interface MemberMapper {
     @Select("select * from member where email = #{email}")
     Optional<Member> findByEmail(@Param("email") String email);
 
-    // mypage 회원정보 조회
-    @Select("select * from member where m_id = 12")
-    Member findById();
+//    // mypage 회원정보 조회
+//    @Select("select * from member where m_id = #{member.m_id}")
+//    Member findById(@Param("member") final Member member);
 
     // mypage 회원정보 수정
     @Update("update lms.member set \n" +
             "pwd = #{pwd},\n" +
             "phone = #{phone}\n" +
-            "where m_id = 12")
-    Long updateInfo(@Param("pwd") final String pwd, @Param("phone") final String phone);
+            "where email = #{email}")
+    Long updateInfo(@Param("email") String email, @Param("pwd") final String pwd, @Param("phone") final String phone);
 
 
     // 회원 가입
-    @Insert("insert into member(email, pwd, name, pid, phone, auth) values(#{member.email}, #{member.pwd}, #{member.name}, #{member.pid}, #{member.phone}, #{member.auth})")
+    @Insert("insert into member(email, pwd, name, pid, phone) values(#{member.email}, #{member.pwd}, #{member.name}, #{member.pid}, #{member.phone})")
 
     @Options(useGeneratedKeys = true, keyProperty = "member.m_id")
     Long save(@Param("member") final Member member);

@@ -83,7 +83,10 @@
                 </td>
                 <td>
                     <div th:if="${rantal_table.return_status} == 0">
-                        <button>반납신청</button>
+                        <form th:action="@{/book/rental/return}" th:method="post">
+                                <input type="text" hidden="true" name="r_id" th:value="${rantal_table.r_id}">
+                                <input type="submit" value="반납신청" onclick="rentalExtension();">
+                        </form>
                     </div>
                 </td>
                 <td>

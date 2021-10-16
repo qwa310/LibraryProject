@@ -6,6 +6,7 @@ import com.example.midtestlms.domain.Overdue;
 import com.example.midtestlms.domain.Rental;
 import com.example.midtestlms.domain.Member;
 import com.example.midtestlms.dto.MemberDto;
+import com.example.midtestlms.dto.NotificationDto;
 import com.example.midtestlms.service.NotificationService;
 import com.example.midtestlms.service.OverdueService;
 import com.example.midtestlms.service.RentalService;
@@ -28,7 +29,6 @@ public class MemberController {
     private final RentalService rentalService;
     private final OverdueService overdueService;
     private final NotificationService notificationService;
-    private MemberDto memberDto;
 
     // 의존성 주입
     @Autowired
@@ -93,13 +93,18 @@ public class MemberController {
 
     // 내 정보 페이지
     @GetMapping("/member/info")
-    public String myInfo(Model model) {
-        Member members = memberService.findMember();
-        List<Rental> rentalList = rentalService.findRental();
-        List<Overdue> overdueList = overdueService.findOverdue();
-        List<Notification> notificationList = notificationService.findNotification();
+    public String myInfo(Model model, NotificationDto notificationDto, @AuthenticationPrincipal User user) {
+        Member members = memberService.findMember(user.getUsername());
+        List<Rental> rentalList = rentalService.findRental(members);
+        List<Overdue> overdueList = overdueService.findOverdue(members);
+        List<Notification> notificationList = notificationService.findNotification(members);
+
 
         System.out.println("총 대여 책 개수 : "+rentalList.size());
+        System.out.println(members);
+        System.out.println(rentalList);
+        System.out.println(overdueList);
+        System.out.println(notificationList);
         model.addAttribute("myinfo",members);
         model.addAttribute("rentalList",rentalList);
         model.addAttribute("overdueList",overdueList);
@@ -109,8 +114,8 @@ public class MemberController {
 
     // 내 정보 수정
     @PostMapping("/member/info")
-    public String updateMyInfo(@RequestParam("myPwd") String pwd, @RequestParam("myPhone") String phone, Member member){
-        memberService.updateMember(member,pwd,phone);
+    public String updateMyInfo(@AuthenticationPrincipal User user, @RequestParam("myPwd") String pwd, @RequestParam("myPhone") String phone){
+        memberService.updateMember(user.getUsername(),pwd,phone);
         System.out.println("정보 수정 완료");
         return "redirect:/member/info";
     }
@@ -121,4 +126,6 @@ public class MemberController {
     public String admin() {
         return "admin/adm_index";
     }
+    
+    
 }
