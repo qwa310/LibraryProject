@@ -56,4 +56,19 @@ public class RentalService {
     	return res;
     }
 
+	// 대여하기
+	public int rentalBook(Rental rental) {
+		//m_id받아야됨
+		System.out.println(rentalMapper.rentableDate(rental));
+		System.out.println(rental);
+		
+		if (rentalMapper.rentableDate(rental) == 0) {
+			int a = rentalMapper.rentalBook(rental);
+			System.out.println("1: " + a);
+			a += rentalMapper.bookStatus(rental);
+			System.out.println("2: " + a);
+			return a;
+		}
+		return 0;
+	}
 }
