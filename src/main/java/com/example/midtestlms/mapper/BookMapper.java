@@ -32,10 +32,5 @@ public interface BookMapper {
     		+ " where isbn = #{isbn}")
     BookSearchInfo bookDetails(@Param("isbn") String isbn);
     
-    // 연장하기
-    @Update("UPDATE `lms`.`rental_manage` \r\n"
-    		+ "   SET `ext_num` = `ext_num`+1 , due_return_date = date_add(`due_return_date`,Interval 7 Day)\r\n"
-    		+ " WHERE (`r_id` = #{r_id});")
-    int extensionBook(@Param("r_id") int r_id);
-    
+   
 }

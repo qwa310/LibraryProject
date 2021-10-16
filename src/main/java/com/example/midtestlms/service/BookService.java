@@ -40,7 +40,5 @@ public class BookService {
 		return bookMapper.bookDetails(isbn);
 	}
 	
-	public int extensionBook(int r_id) {
-		return bookMapper.extensionBook(r_id);
-	}
+	
 }

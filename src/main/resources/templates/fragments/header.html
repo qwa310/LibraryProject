@@ -7,12 +7,11 @@
 				<div class="blue">더조니열람실</div>
 				<div class="purple">전자도서관</div>
 				<div class="right">
-				<h2 th:text="${member}"></h2>
 					<ul>
 						<li sec:authorize="isAnonymous()"><a th:href="@{/member/login}">로그인</a></li>
 						<li sec:authorize="isAnonymous()"><a th:href="@{/member/new}">회원가입</a></li>
 						<li sec:authorize="hasRole('ROLE_MEMBER')"><a th:href="@{/member/info}">마이서재</a></li>
-						<li><span th:authentication="${member}"></span></li>
+						<li sec:authorize="isAuthenticated()"><span th:text ="${member.name}">님 환영합니다.</span>
 						<li sec:authorize="isAuthenticated()"><a th:href="@{/member/logout}">로그아웃</a><br>
 					</ul>
 				 </div>  
