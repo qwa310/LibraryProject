@@ -28,7 +28,13 @@ public class MemberService implements UserDetailsService{
         this.memberMapper = memberMapper;
     }
 
-    // 전체 회원 조회
+    // Admin - 회원 삭제
+    public void removeMember(Long m_id){
+        memberMapper.removeMemberById(m_id);
+        System.out.println("MemberService.removeMember : " + m_id);
+    }
+
+    // Admin - 전체 회원 조회
     public List<Member> findMembers(){
         return memberMapper.findAll();
     }
@@ -39,18 +45,6 @@ public class MemberService implements UserDetailsService{
     }
 
     // 회원 가입
-
-    // 유저 조회
-    public Member findMember(){
-        return memberMapper.findById();
-    }
-
-    // 유저 정보 수정
-    public Long updateMember(Member member, String pwd, String phone){
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        return memberMapper.updateInfo(passwordEncoder.encode(pwd), phone);
-    }
-
     @Transactional
     public Long joinMember(MemberDto memberDto) {
         // 비밀번호 암호화
@@ -58,25 +52,8 @@ public class MemberService implements UserDetailsService{
 //        memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
         memberDto.setPwd(passwordEncoder.encode(memberDto.getPwd()));
 
-        return memberMapper.save(memberDto.toEntity());
+        return memberMapper.saveMember(memberDto.toEntity());
     }
-
-//    @Transactional
-//    public Long joinAdmin() {
-//        MemberDto memberDto = new MemberDto().builder()
-//                .email("admin@example.com")
-//                .pwd("1234")
-//                .name("김상연")
-//                .pid("9607167777777")
-//                .phone("01088884444")
-//                .build();
-//
-//        // 비밀번호 암호화
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-////        memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
-//        memberDto.setPwd(passwordEncoder.encode(memberDto.getPwd()));
-//        return memberMapper.saveAdmin(memberDto.toEntity());
-//    }
 
     // Spring Security 가 제공하는 로그인 처리 로직.
     @Override

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Management System</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>회원 목록</h1>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>아이디</th>
+                <th>패스워드</th>
+                <th>이름</th>
+                <th>주민등록번호</th>
+                <th>휴대전화번호</th>
+                <th>권한</th>
+                <th>대출 가능 날짜</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.email}"></td>
+            <td th:text="${member.pwd}"></td>
+            <td th:text="${member.name}"></td>
+            <td th:text="${member.pid}"></td>
+            <td th:text="${member.phone}"></td>
+            <td th:text="${member.auth}"></td>
+            <td th:text="${member.rentable_date}"></td>
+            <td>
+                <form th:action="@{/admin/member-list}" th:method="POST">
+                    <input type="hidden" th:value="${member.m_id}" name="m_id">
+                    <input th:type="submit" value="삭제"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<a href="/">돌아가기</a>
+</body>
+</html>

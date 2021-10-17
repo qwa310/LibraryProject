@@ -15,6 +15,8 @@ public class Member {
     private String rentable_date;
     private String auth;
 
+
+
     @Builder
     public Member(Long m_id, String email, String pwd, String name, String pid, String phone, String rentable_date, String auth) {
         this.m_id = m_id;
@@ -26,10 +28,4 @@ public class Member {
         this.rentable_date = rentable_date;
         this.auth = auth;
     }
-//    @Builder
-//    public Member(String pwd, String phone) {
-//        this.pwd = pwd;
-//        this.phone = phone;
-//    }
-
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Management System</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>도서 관리</h1>
+<h2><a th:href="@{/book-manage/new}">도서 추가</a></h2>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>제목</th>
+            <th hidden>ISBN</th>
+            <th hidden>카테고리</th>
+            <th>출판사</th>
+            <th>도서 발간 날짜</th>
+            <th>저자</th>
+            <th>재고 수량</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td><a th:href="@{/booklist(b_title=${book.b_title}, isbn=${book.isbn})}" th:text="${book.b_title}"/></td>
+            <td th:text="${book.isbn}" hidden></td>
+            <td th:text="${book.c_name}"></td>
+            <td th:text="${book.b_publisher}"></td>
+            <td th:text="${book.b_pdate}"></td>
+            <td th:text="${book.b_author}"></td>
+            <td th:text="${book.available_stock}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<a href="/">돌아가기</a>
+</body>
+</html>

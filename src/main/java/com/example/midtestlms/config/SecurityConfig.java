@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception
     {
         // static 디렉터리에 대한 접근에 대해서 접근 권한 인증 절차를 거치지 않도록 ( = 항상통과 )
-        web.ignoring().antMatchers("/static/css/**", "/js/**", "/img/**", "/lib/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**");
     }
 
     @Override
@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)    // 로그아웃 시 세션 제거 : 로그아웃 했는데 로그인이 되어있다거나 하는 예외 상황 발생하지 않도록.
                 .and()
                 // 403 예외처리 핸들링
-                .exceptionHandling().accessDeniedPage("/member/denied")
+                .exceptionHandling().accessDeniedPage("/denied")
                 .and()
                 .rememberMe()
                 .key("uniqueAndSecret");
