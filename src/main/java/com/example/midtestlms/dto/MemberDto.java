@@ -15,7 +15,8 @@ public class MemberDto {
     private String phone;
     private String rentable_date;
     private String auth;
-
+    private int member_status;
+    
     public Member toEntity(){
         return Member.builder()
                 .m_id(m_id)
@@ -25,12 +26,13 @@ public class MemberDto {
                 .pid(pid)
                 .phone(phone)
                 .rentable_date(rentable_date)
+                .member_status(member_status)
                 .auth(auth)
                 .build();
     }
 
     @Builder
-    public MemberDto(Long m_id, String email, String pwd, String name, String pid, String phone, String rentable_date, String auth) {
+    public MemberDto(int member_status,Long m_id, String email, String pwd, String name, String pid, String phone, String rentable_date, String auth) {
         this.m_id = m_id;
         this.email = email;
         this.pwd = pwd;
@@ -39,5 +41,6 @@ public class MemberDto {
         this.phone = phone;
         this.rentable_date = rentable_date;
         this.auth = auth;
+        this.member_status = member_status;
     }
 }

@@ -6,6 +6,22 @@
     <title>Admin Page</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  <!-- jquery library 임포트 -->
     <script type="text/javascript" th:src="@{/js/mypage.js/}"></script>
+    <script>
+        function rentalExtension() {
+            console.log('rental extention btn click event');
+            if(confirm('책 대여 기간을 연장 하겠습니까?') == true){
+                location.href = '/book/rental/extension';
+            }else{
+                return false;
+            }
+            // location.href = '/book/rental/extension';
+        }
+        function returnBook() {
+            alert("책 반납이 완료 되었습니다.")
+            location.href = '/member/iinfo';
+            // location.href = '/book/rental/extension';
+        }
+    </script>
 </head>
 <body>
 <h1>JSTL MyPage</h1>
@@ -78,21 +94,26 @@
                 <td name="due_return_date" th:text="${rantal_table.due_return_date}">
 
                 </td>
-                <td name="return_status" th:text="${rantal_table.return_status}">
+                <td>
+                 <div th:text="${rantal_table.return_status} == 0 ? '대여중' : '반납완료'"></div>
 
                 </td>
                 <td>
+                
                     <div th:if="${rantal_table.return_status} == 0">
                         <form th:action="@{/book/rental/return}" th:method="post">
                                 <input type="text" hidden="true" name="r_id" th:value="${rantal_table.r_id}">
-                                <input type="submit" value="반납신청" onclick="rentalExtension();">
+                                <input type="submit" value="반납신청" onclick="returnBook();">
                         </form>
                     </div>
                 </td>
                 <td>
                     <div th:if="${rantal_table.return_status} == 0">
-                        <div th:if="${rantal_table.ext_num} <= 3">
-                            <button>연장신청</button>
+                        <div th:if="${rantal_table.ext_num} < 3">
+                            <form th:action="@{/book/rental/extension}" th:method="post">
+                                <input type="text" hidden="true" name="r_id" th:value="${rantal_table.r_id}">
+                                <input type="submit" value="연장신청" onclick="rentalExtension();">
+                            </form>
                         </div>
                     </div>
                 </td>
@@ -128,7 +149,7 @@
                 <td th:text="${overdue_table.b_title}">
 
                 </td>
-                <td th:text="${overdue_table.c_id}">
+                <td th:text="${overdue_table.c_name}">
 
                 </td>
                 <td th:text="${overdue_table.b_author}">

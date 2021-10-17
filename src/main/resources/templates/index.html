@@ -22,21 +22,18 @@
 		<div class="transparent">
 			<div class="search">
 				<span id="search">통합자료검색</span>
-				<form action="bookSearch">
 					<div id="searchBtn" class="selectBox">
 						<select id="bookcon" name="bookcon" class="select">
-							<option th:value="none">선택</option>
-							<option th:value="b_publisher">출판사</option>
 							<option th:value="b_title">제목</option>
+							<!-- <option th:value="c_name">장르</option> -->
 							<option th:value="b_author">글쓴이</option>
-							<option th:value="c_name">장르</option>
+							<option th:value="b_publisher">출판사</option>
 						</select>
 					</div>
 					<input type="text" id="searchText"> 
 					<a th:name="search" id="searchA">
 						<img th:src="@{/css/images/icon.png}" alt="">
 					</a>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -58,10 +55,6 @@
 			<span>신작도서</span>
 		</div>
 	</div>
-	<form action="member/test">
-		<input type="hidden" th:name = "r_Id" th:value ="2"/>
-		<input type="submit" value="전송">
-	</form>
 	<div class="empty"></div>
 </body>
 
@@ -69,11 +62,27 @@
 <footer th:replace="fragments/footer::footerFragment"></footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+$(function(){	
+	const contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 	$('#searchA').on('click',function(){
 		let searchText = $('#searchText').val();
 		let bookCon = $('#bookcon').val();
-		location.href="/book/bookSearch?search="+searchText+"&bookcon="+bookCon;
+		if(searchText == ""){
+			alert("검색 값을 입력주세요");
+			return;
+		}
+		$("#searchBookList *").empty();
+		$("#firstList").empty();
+		$.get(contextPath + "/showBookList/"+searchText+"/"+bookCon,
+			function(json){
+				if(json.length == 0){
+					alert("검색 결과가 없습니다.");
+					return;
+				}else{
+					location.href="/book/bookSearch?search="+searchText+"&bookcon="+bookCon;
+				}
+			}
+		)	
 	})
 })
 </script>

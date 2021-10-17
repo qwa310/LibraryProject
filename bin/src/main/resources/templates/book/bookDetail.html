@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>책 상세 페이지</title>
+</head>
+<body>
+	<div>
+		<div><img alt="책사진" th:src="${bDetails.image}"></div>
+		<div>책 제목 :   <span th:text="${bDetails.b_title}"></span></div>
+		<div>작가 :     <span th:text="${bDetails.b_author}"></span></div>
+		<div>장르 :     <span th:text="${bDetails.c_name}"></span></div>
+		<div>출판사 :   <span th:text="${bDetails.b_publisher}"></span> </div>
+		<div>출간 날짜 : <span th:text="${bDetails.b_pdate}"></span> </div> 
+	</div>
+	
+	<div class="tb_col">
+		<div>
+			<div>ID</div>
+			<div>ISBN</div>
+			<div>대여</div>
+		</div>
+		<div th:each="bList : ${bList}">
+			<div th:text="${bList.b_id}"></div>
+			<div th:text="${bList.isbn}"></div>
+			<div th:text="${bList.b_status} == 0 ? 가능 : 불가"></div>
+			<button>알림</button>	
+			<form th:action="@{/book/rental}" method="POST">
+				<input type="hidden" name="m_id" th:value="${member.m_id}">
+				<input type="submit" value="대출하기">
+			</form>
+		</div>
+	</div>
+	
+
+</body>
+</html>

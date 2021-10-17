@@ -56,18 +56,24 @@ public class RentalService {
     	return res;
     }
 
+
 	// 대여하기
-	public int rentalBook(Rental rental) {
-		//m_id받아야됨
-		System.out.println(rentalMapper.rentableDate(rental));
-		System.out.println(rental);
+	public int rentalBook(Member member, String isbn, int b_id) {
+		System.out.println("hihi : "+member.getM_id().intValue());
+		List<Member> memberList = rentalMapper.rentableDate(member.getM_id().intValue());
 		
-		if (rentalMapper.rentableDate(rental) == 0) {
-			int a = rentalMapper.rentalBook(rental);
-			System.out.println("1: " + a);
-			a += rentalMapper.bookStatus(rental);
-			System.out.println("2: " + a);
-			return a;
+		System.out.println(memberList +"나 memberList");
+		System.out.println(memberList.size());
+		if (memberList.size() > 0) {
+			System.out.println("1111111111111");
+			// 책 상태 대출하기로 바꾸기 : 쿼리문
+			rentalMapper.bookStatus(b_id);
+			
+			System.out.println("22222222222");
+			// rental_manage에 대출 된 책 insert : 쿼리문
+			rentalMapper.rentalBook(member.getM_id().intValue(), isbn, b_id);
+			System.out.println("대여성공");
+			return 1;
 		}
 		return 0;
 	}

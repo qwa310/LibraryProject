@@ -1,5 +1,7 @@
 package com.example.midtestlms.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -49,7 +51,7 @@ public class RentalController {
 		// r_id 를 이용하여 책 대여 연장
 		Member member = memberService.findMember(user.getUsername());
 		System.out.println("extension" + r_id);
-		int result = rentalService.updateDueReturnDate(37);
+		int result = rentalService.updateDueReturnDate(r_id);
 		if (result < 0) {
 			System.out.println("책 대여 연장 실패 로직 추가 구현 해야함");
 			return "";
@@ -72,19 +74,19 @@ public class RentalController {
 	}
 
 	@PostMapping("/book/rental")
-	public String rentalBook(@AuthenticationPrincipal User user, @RequestParam("m_id") int m_id, Model model) {
-		System.out.println(m_id);
-		// r_id 를 이용하여 책 대여 연장
-		Member member = memberService.findMember(user.getUsername());
-		Rental rental = new Rental();
-		rental.setM_id(m_id);
-		int result = rentalService.rentalBook(rental);
-		if (result < 0) {
-			System.out.println("대출 실패");
-		}
+	public String rentalBook(@AuthenticationPrincipal User user, 
+			@RequestParam("m_id") int m_id, 
+			@RequestParam("isbn") String isbn, 
+			@RequestParam("b_id") int b_id, Model model) {
 		
+		System.out.println(m_id);
+		// r_id 를 이용하여 책 대여
+		Member member = memberService.findStatus(m_id);
+		System.out.println("+++++++++++++++++"+isbn);
+		int res = rentalService.rentalBook(member, isbn, b_id);
 		model.addAttribute("member", member);
-		return "redirect:/book/bookDetail";
+		
+		return "redirect:/";
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.midtestlms.domain.Book;
 import com.example.midtestlms.domain.BookSearchInfo;
+import com.example.midtestlms.domain.Member;
 import com.example.midtestlms.service.BookService;
 import com.example.midtestlms.service.MemberService;
 
@@ -35,7 +36,13 @@ public class BookController {
     	List<Book> bList = bookService.bookDetailList(isbn);
     	BookSearchInfo bDetails = bookService.bookDetails(isbn);
     	ModelAndView mav = new ModelAndView("/book/bookDetail", "bList", bList);
-    	mav.addObject("member",memberService.findMember(user.getUsername().toString()));
+    	if(user != null) {
+			mav.addObject("member",memberService.findMember(user.getUsername().toString()));
+		}else {
+			new Member();
+			mav.addObject("member",new Member());
+			
+		}
     	mav.addObject( "bDetails", bDetails);
     	return mav;
     }
@@ -59,7 +66,9 @@ public class BookController {
 			break;
 		}
 		List<BookSearchInfo> bookList = bookService.SearchBookList(bookSearchInfo);
-		model.addAttribute("member",memberService.findMember(user.getUsername().toString()));
+		if(user != null) {
+			model.addAttribute("member",memberService.findMember(user.getUsername().toString()));
+		}
 		model.addAttribute("bookList", bookList);
     	return "book/bookSearch";
     }

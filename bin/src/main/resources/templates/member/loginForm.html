@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -18,4 +19,50 @@
         <button type="submit">등록</button>
     </form>
 </body>
+=======
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>더조니도서관</title>
+	    <link rel="shortcut icon" th:href="@{/css/favicon.ico}">
+	    
+	   <link rel="stylesheet" th:href="@{/css/login.css}">
+	</head>
+	
+	<!-- header.html -->
+	<header th:replace="fragments/header::headerFragment"></header>	
+	
+	<!-- <body layout:fragment="content"> layout.html 사용의 경우 -->
+	<body layout:fragment="content">	
+    
+    <div class="section">
+    	<div class="wrap">
+	    	<div class="title_login">로그인</div>
+    		<div class="welcome">
+    		
+	    		<img th:src="@{/css/images/smile.png}" alt="">
+	    		<span>더조니도서관 방문을 환영합니다.</span>
+	    	<div class="form">
+			    <form th:action="@{/member/login}" method="POST">
+			            <label for="email">Email : </label>
+			            <input type="text" name="email" id="email" ><br>
+			            <label for="pwd">Password : </label>
+			            <input type="password" name="pwd" id="pwd" >
+			        	<button type="submit">로그인</button>
+			    </form>
+	    	</div>
+	    		
+    		 </div>
+    	</div>
+    </div>
+    </body>
+    
+    <!-- footer.html -->
+	<footer th:replace="fragments/footer::footerFragment"></footer>
+	
+>>>>>>> 9fd73a08dc762f5f4b0267edae2711c342b07c89
 </html>

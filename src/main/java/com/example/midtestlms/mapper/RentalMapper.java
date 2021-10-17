@@ -66,22 +66,25 @@ public interface RentalMapper {
     		+ " WHERE `m_id` = #{rental.m_id}")
     int returnRentableDate(@Param("rental") Rental rental);
     
+
    	// 대여하기
     // 1. 대여 가능한 사람인지 체크
-    @Select(" SELECT * "
-    		+   "   FROM lms.member "
-    		+   "  WHERE date(rentable_date) < date(now()) and m_id = #{rental.m_id} ")
-    int rentableDate(@Param("rental") final Rental rental);
+    // ((date(rentable_date) < date(now() )) or rentable_date is null )
+    @Select("SELECT * FROM lms.member " +
+            "WHERE (date(rentable_date) < date(now()) or rentable_date is null ) " +
+            "and m_id = #{m_id} ")
+    List<Member> rentableDate(@Param("m_id") final int m_id);
     
     // 2. 책 상태 대출하기로 바꾸기 
-    @Update( " UPDATE `lms`.`book` SET `b_status` = '1' WHERE (b_id = #{rental.b_id}) ")
-    int bookStatus(@Param("rental") final Rental rental);	
+    @Update( " UPDATE `lms`.`book` SET `b_status` = '0' WHERE (b_id = #{b_id}) ")
+    int bookStatus(@Param("b_id") final int b_id);	
     
     // 3. rental_manage에 대출 된 책 insert
-    @Insert( " INSERT INTO lms.rental_manage "
-    		+ " (b_id, m_id, rent_date, due_return_date, isbn)"
-    		+ " values" +
-    		" (#{rental.b_id}, #{rental.m_id}, now(), " +
-    		" date_add(now(), INTERVAL 14 DAY), #{rental.isbn} ")
-    int rentalBook(@Param("rental") final Rental rental);	
+    @Insert( "INSERT INTO lms.rental_manage "
+    		+ " (b_id, m_id, isbn, due_return_date)"
+    		+ " values(#{b_id}, #{m_id}, #{isbn}, "
+    		+ " date_add(now(), INTERVAL 14 DAY)) ")
+    int rentalBook(@Param("m_id") final int m_id, 
+    		@Param("isbn") final String isbn, 
+    		@Param("b_id") final int b_id);	
 }
