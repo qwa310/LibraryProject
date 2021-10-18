@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>더조니도서관</title>
+		<link rel="shortcut icon" th:href="@{/css/favicon.ico}">
+		<!-- config.html -->
+		<th:block th:replace="fragments/config::configFragment"></th:block>
+		<link rel="stylesheet" th:href="@{/css/index.css}">
+	</head>
+	
+	<header th:replace="fragments/header::headerFragment"></header>
+
+	<body>
+	<div class="search_zone">
+		<div class="transparent">
+				<div class="search">
+					<span id="search">통합자료검색</span>
+					<form autocomplete="off" onsubmit="return false">
+					<div id="searchBtn" class="selectBox">
+						<select id="bookcon" name="bookcon" class="select">
+							<option th:value="b_title">제목</option>
+							<option th:value="b_author">글쓴이</option>
+							<option th:value="b_publisher">출판사</option>
+						</select>
+					</div>
+					<input type="text" id="searchText" placeholder="검색어를 입력해주세요."> 
+					<a th:name="search" id="searchA">
+						<img th:src="@{/css/images/icon.png}" alt="">
+					</a>
+					</form>
+			</div>
+		</div>
+	</div>
+	<div class="section">
+			<div class="notice">
+				<span class="zero">공지사항</span>
+				<ul>
+					<li>이야기가 있는 코딩</li>
+					<li>부산인문학 줌인 저자초청 특강</li>
+					<li>더조니도서관 자원봉사자 모집</li>
+					<li>금요일 저녁(12.18. 6시) 김더존 신예작가를...</li>
+					<li>작은도서관 발전방안 포럼 안내</li>
+				</ul>
+			</div>
+			<div class="news">
+				<span class="zero">도서관소식</span>
+				<ul>
+					<li>
+						<span class="one" style="background: #4f317b;">21.10.17</span>
+						<span class="two">박정민 강사님 초청강연</span>
+					</li>
+					<li>
+						<span class="one" style="background: #008515;">21.10.15</span>
+						<span class="two">더조니도서관 임시휴관 안내</span>
+					</li>
+					<li>
+						<span class="one" style="background: #21409a;">21.10.14</span>
+						<span class="two">2021년 정기도서 구매견적</span>
+					</li>
+					<li>
+						<span class="one" style="background: #007a74;">21.10.13</span>
+						<span class="two">11월 유아그림책 소개</span>
+					</li>
+					<li>
+						<span class="one" style="background: #696969;">21.10.10</span>
+						<span class="two">문화체육관광부 장관상 수상</span>
+					</li>
+				</ul>
+			</div>
+			<div class="new">
+				<span class="zero">신작도서</span>
+				<ul>
+					<li><span class="num">1</span><span>인간실격</span></li>
+					<li><span class="num">2</span><span>페스트</span></li>
+					<li><span class="num">3</span><span>오만과 편견</span></li>
+				</ul>
+			</div>
+		</div>	
+		<div class="empty"></div>
+	<script type="text/javascript" th:src="@{/js/index.js/}"></script>
+</body>
+
+<footer th:replace="fragments/footer::footerFragment"></footer>
+
+</html>

@@ -1,0 +1,79 @@
+.section {
+	margin: 50px 0 100px 0;
+}
+
+.wrap {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.bookWrap {
+	width: 100%;
+	margin-bottom: 25px;
+}
+
+.bookImg {
+	width: 20%;
+	float: left;
+}
+
+.bookInfoWrap {
+	width: 80%;
+	float: left;
+	position: relative;
+}
+.bookInfo{
+	position: absolute;
+	transform: translate(0, 20%);
+}
+.bookTitle{
+	font-weight: bold;
+	font-size: 25px;
+	display: block;
+	padding-bottom: 25px;
+	box-sizing: border-box;
+}
+.clear {
+	clear: both;
+}
+
+.tb_col {
+	width: 100%;
+}
+
+.bdt {
+	width: 100%;
+	padding: 5px 0;
+	font-size: 20px;
+}
+
+.detail {
+	color: white;
+	background-color: #363b9e;
+	border: 1px solid #fff;
+}
+
+.detail, .details {
+	float: left;
+	width: calc(100% / 4 - 3px);
+	text-align: center;
+}
+
+.detail:last-child {
+	border-right: 0;
+}
+
+.details {
+	background-color: #fff;
+}
+
+#rental{
+	font-size: 20px;
+	outline: 0;
+	border-radius: 15px;
+	padding: 5px 30px;
+	cursor: pointer;
+	text-decoration: underline;
+	background: none;
+	border:0;
+}

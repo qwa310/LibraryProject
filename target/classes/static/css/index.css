@@ -1,0 +1,189 @@
+@charset "EUC-KR";
+
+.search_zone{
+	width: 100%;
+	height: 500px;
+	background-image: url("/css/images/library.jpg"); 
+ 	background-size: cover;
+	background-position: center;
+	position : relative;
+}
+.search_zone .transparent{
+	width: 100%;
+	height: 500px;
+	position : absolute;
+}
+.search_zone .transparent .search{
+	position: absolute;
+    left: 50%;
+    transform: translate(-50%, 150px);
+    z-index: 1;
+	width: 1200px;
+	height: 100px;
+	background: rgb(2,0,36);
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}	
+.search_zone .transparent .search #search{
+	color: white;
+    float: left;
+    position: relative;
+    font-size: 25px;
+    transform: translate(50px,-50%);
+    top: 50%;
+    font-family: 'Noto Sans KR', sans-serif;
+}	
+.search_zone .transparent .search form input{
+	width: 700px;
+    height: 65px;
+    position: absolute;
+    font-size: 30px;
+    border: 0;
+    outline: 0;
+    left: 29%;
+    transform: translate(0, -50%);
+    top: 50%;
+    padding-left: 15px;
+}
+.search form a img{
+	background-color: white;
+    height: 65px;
+    right: 6%;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: absolute;
+}
+.section{
+	width: 1200px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -45%);
+}
+.zero{
+	font-size: 25px;
+}
+.empty{
+	height: 200px;
+}
+.section .news .one{
+	
+    padding: 5px 20px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 15px;
+    box-sizing: border-box;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-right: 2%;
+}
+.new li{
+	list-style: none;
+}
+.new .num{
+        line-height: 28px;
+    background: #004fb9;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    padding: 7px 13px;
+    margin-right: 10px;
+}
+.two{font-size: 15px;}
+.section div{
+	float:left;
+	width: calc(100%/3);
+	height: 100%;
+	padding: 20px;
+	box-sizing: border-box;
+	font-weight: 500;
+	padding-left: 30px;
+}
+
+.notice{
+	background-color: white;
+	
+}
+.notice ul{
+	margin-left: 6%;
+    margin-top: 5%;
+    line-height: 30px;
+}
+.news{
+	background-color: #d1e9e8;
+}
+.news ul{
+    margin-top: 5%;
+    line-height: 30px;
+}
+.news ul li{
+	list-style: none;
+	padding: 4px 0;
+}
+.new{
+	background-color: rgb(0, 122, 116);
+	color: #ffffff;
+}
+.new{
+	background-color: rgb(0, 122, 116);
+	color: #ffffff;
+}
+.new ul{
+    margin-top: 5%;
+    line-height: 30px;
+    background: #ffffff;
+    padding: 15px 15px;
+    box-sizing: border-box;
+    padding-bottom: 25px;
+}
+.new ul li{
+       margin-top: 5%;
+    line-height: 30px;
+    padding: 5px 0;
+    color: black;
+    border-bottom: 1px dashed;
+    font-size: 14px;
+}
+.new ul li:first-child {
+    margin-top: 0;
+}
+.wrap{
+	margin: 0 auto;
+	width:1200px;
+	height: 100%;
+}
+input::placeholder {
+  color: #dddddd;
+  font-size: 25px;
+}
+ .selectBox {
+   position: absolute;
+   width: 90px;
+   top: 50%;
+   left: 15%;
+   height: 65px;
+   border-radius: 4px;
+   transform: translate(50px, -50%);
+   border: 2px solid #ffffff;
+}
+.selectBox .select {
+  height: inherit;
+  background: transparent;
+  border: 0 none;
+  outline: 0 none;
+  padding: 0 10px;
+  position: relative;
+  font-size: 16px;
+  padding-right: 5px;
+  z-index: 3; 
+  color: #ffffff;
+  cursor: pointer;
+}
+.selectBox .select option {
+	color: rgb(0, 0, 0);
+	padding: 3px 0;
+	font-size: 16px;
+}
