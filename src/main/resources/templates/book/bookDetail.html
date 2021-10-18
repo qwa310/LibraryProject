@@ -1,85 +1,76 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<meta charset="UTF-8">
-<title>책 상세 페이지</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>더조니도서관 :: 도서상세</title>
+	<link rel="shortcut icon" th:href="@{/css/favicon.ico}">
+	<!-- config.html -->
+	<th:block th:replace="fragments/config::configFragment"></th:block>
+<link rel="stylesheet" th:href="@{/css/bookdetail.css}">
 </head>
-
+<header th:replace="fragments/header::headerFragment"></header>
 <body>
-	<!-- header.html -->
-	<header th:replace="fragments/header::headerFragment"></header>
-
-	<div>
-		<div><img alt="책사진" th:src="${bDetails.image}"></div>
-		<div>책 제목 :   <span th:text="${bDetails.b_title}"></span></div>
-		<div>작가 :     <span th:text="${bDetails.b_author}"></span></div>
-		<div>장르 :     <span th:text="${bDetails.c_name}"></span></div>
-		<div>출판사 :   <span th:text="${bDetails.b_publisher}"></span> </div>
-		<div>출간 날짜 : <span th:text="${bDetails.b_pdate}"></span> </div> 
-	</div>
-	
-	<div class="tb_col">
-		<div>
-			<div>ID</div>
-			<div>ISBN</div>
-			<div>대여</div>
-		</div>
-		<div th:each="bList : ${bList}">
-			<div th:text="${bList.b_id}"></div>
-			<div th:text="${bList.isbn}"></div>
-			<div th:text="${bList.b_status} == 0 ? 불가 : 가능"></div>
-			<form th:action="@{/book/rental}" method="POST" onsubmit="return formCheck()">
+	<div class="section">
+		<div class="wrap">
+			
+			<div class="bookWrap">
+				<div class="bookImg"><img alt="책사진" th:src="${bDetails.image}"></div>
+				<div class="bookInfoWrap">
+					<div class="bookInfo">
+						<div><span class="bookTitle" th:text="${bDetails.b_title}"></span></div>
+						<div>저&nbsp;자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${bDetails.b_author}"></span></div>
+						<div>장&nbsp;르&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${bDetails.c_name}"></span></div>
+						<div>출&nbsp;판&nbsp;사 :&nbsp;&nbsp;&nbsp;<span th:text="${bDetails.b_publisher}"></span> </div>
+						<div>출간날짜&nbsp;:&nbsp;&nbsp;<span th:text="${bDetails.b_pdate}"></span> </div>
+					</div> 
+				</div>
+				<form th:action="@{/book/notification}" method="POST" onsubmit="return notiCheck()">
                     <div th:if="${member.m_id} != null">
-                        <input type="hidden" name="m_id" th:value="${member.m_id}">
-                        <input id = "status" type="hidden" name="m_id" th:value="${member.member_status}">
-                        <input id = "date" type="hidden" name="m_id" th:value="${member.rentable_date}">
-						<input type="hidden" name="b_status" th:value="${bList.b_status}">
-						<input type="hidden" name="b_id" th:value="${bList.b_id}">
-						<input type="hidden" name="isbn" th:value="${bList.isbn}">
-						<div th:if="${bList.b_status} != 1">
-							<input id="noti" type="submit" value="알림" onclick="notification()">
-						</div>
-						<div th:if="${bList.b_status} != 0">
-							<input id="rental" type="submit" value="대출" onclick="rentalBook()">
+						<div th:if="${count} == 0">
+							<input type="hidden" name="isbn" th:value="${bDetails.isbn}">
+							<input id="noti" value="알림" type="submit" onClick="notification()">
 						</div>
 					</div>
-			</form>
+				</form>
+				<div class="clear"></div>
+			</div>
+			
+			<div class="tb_col">
+				<div class="bdt">
+					<div class="detail">ID</div>
+					<div class="detail">ISBN</div>
+					<div class="detail">대여</div>
+					<div class="detail">대출하기</div>
+					<div class="clear"></div>
+				</div>
+				<!-- <h2 th:text="${member}"></h2> -->
+				<div class="bdt" th:each="bList : ${bList}">
+					<div class="details" th:text="${bList.b_id}"></div>
+					<div class="details" th:text="${bList.isbn}"></div>
+					<div class="details" th:text="${bList.b_status} == 0 ? 불가 : 가능"></div>
+					<form class="details" th:action="@{/book/rental}" method="POST" onsubmit="return rentalCheck()">
+		                    <div th:if="${member.m_id} != null">
+		                        <input type="hidden" name="m_id" th:value="${member.m_id}">
+		                        <input id = "status" type="hidden" name="m_id" th:value="${member.member_status}">
+		                        <input id = "date" type="hidden" name="m_id" th:value="${member.rentable_date}">
+								<input type="hidden" name="b_status" th:value="${bList.b_status}">
+								<input type="hidden" name="b_id" th:value="${bList.b_id}">
+								<input type="hidden" name="isbn" th:value="${bList.isbn}">
+								<div th:if="${bList.b_status} != 0">
+									<input id="rental" type="submit" value="대출" onclick="rentalBook()">
+								</div>
+							</div>
+					</form>
+					<div class="clear"></div>
+				</div>
+			</div>
 		</div>
 	</div>
-	
-
+<script type="text/javascript" th:src="@{/js/bookDetail.js/}"></script>
 </body>
-<script>
-	function rentalBook(){
-		
-	}
-
-	function formCheck(){
-		let status = document.getElementById("status");
-		let noti =document.getElementById("noti");
-	    let rental =document.getElementById("rental");
-	    console.log(noti) 
-	    console.log(rental)
-	    if(rental != null){
-	    	if(confirm('책을 대여 하시겠습니까?') == true){
-	    		if(status.value == 1){
-	    			let date = document.getElementById("date");
-	    	    	alert(`연체 기간 : ${date.value}`);
-	    	    	return false;
-	    	    }
-				return true;
-		    }else{
-		        return false;
-		    }
-	    }
-	    
-	    if(noti != null){
-	    	if(confirm('책을 알림 설정 하시겠습니까?') == true){
-				return true;
-		    }else{
-		        return false;
-		    }
-	    }
-	}
-</script>
+	<footer th:replace="fragments/footer::footerFragment"></footer>
 </html>

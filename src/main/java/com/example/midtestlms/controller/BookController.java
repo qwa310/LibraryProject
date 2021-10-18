@@ -16,28 +16,31 @@ import com.example.midtestlms.domain.BookSearchInfo;
 import com.example.midtestlms.domain.Member;
 import com.example.midtestlms.service.BookService;
 import com.example.midtestlms.service.MemberService;
+import com.example.midtestlms.service.NotificationService;
 
 @Controller
 public class BookController {
 
 	private final MemberService memberService;
 	private BookService bookService;
+	private NotificationService notificationService;
     // 의존성 주입
 	@Autowired
-	public BookController(MemberService memberService,BookService bookService) {
+	public BookController(MemberService memberService,BookService bookService, NotificationService notificationService) {
 		this.memberService = memberService;
 		this.bookService = bookService;
+		this.notificationService = notificationService;
 	}
 
     
     @GetMapping("/book/bookDetail")
     public ModelAndView bookDetail(@AuthenticationPrincipal User user,@RequestParam(required = false) String isbn) {
-    	System.out.println(isbn);
     	List<Book> bList = bookService.bookDetailList(isbn);
     	BookSearchInfo bDetails = bookService.bookDetails(isbn);
     	ModelAndView mav = new ModelAndView("/book/bookDetail", "bList", bList);
     	if(user != null) {
 			mav.addObject("member",memberService.findMember(user.getUsername().toString()));
+			mav.addObject("count", notificationService.bookStatus(isbn));
 		}else {
 			new Member();
 			mav.addObject("member",new Member());

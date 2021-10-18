@@ -3,28 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/mypage.css/}" rel="stylesheet" type="text/css" media="screen">
-    <title>Admin Page</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  <!-- jquery library 임포트 -->
+    <title>더조니도서관 :: 마이서재</title>
+    <link rel="shortcut icon" th:href="@{/css/favicon.ico}">
+    <th:block th:replace="fragments/config::configFragment"></th:block>
     <script type="text/javascript" th:src="@{/js/mypage.js/}"></script>
-    <script>
-        function rentalExtension() {
-            console.log('rental extention btn click event');
-            if(confirm('책 대여 기간을 연장 하겠습니까?') == true){
-                location.href = '/book/rental/extension';
-            }else{
-                return false;
-            }
-            // location.href = '/book/rental/extension';
-        }
-        function returnBook() {
-            alert("책 반납이 완료 되었습니다.")
-            location.href = '/member/iinfo';
-            // location.href = '/book/rental/extension';
-        }
-    </script>
 </head>
+<header th:replace="fragments/header::headerFragment"></header>
+
 <body>
-<h1>JSTL MyPage</h1>
+<body>
+
 <div class="container">
     <ul class="tabs">
         <li class="tab-link current" data-tab="tab-1">회원정보수정</li>
@@ -46,7 +34,7 @@
             <label>휴대폰번호:</label>
             <input type="text" name="myPhone" th:value="${myinfo.phone}"><br>
 
-            <input type="submit" value="정보수정" >
+            <input type="submit" value="정보수정" style="background-color:#363b9e;color:#fff;">
         </form>
     </div>
     <div id="tab-2" class="tab-content">
@@ -168,16 +156,12 @@
         <table>
             <tr>
                 <th>idx</th>
-                <th>책id</th>
                 <th>ISBN</th>
                 <th>제목</th>
                 <th>알람 전송 여부</th>
             </tr>
             <tr th:each="notification_table : ${notificationList}">
                 <td th:text="${notification_table.n_id}">
-
-                </td>
-                <td th:text="${notification_table.b_id}">
 
                 </td>
                 <td th:text="${notification_table.isbn}">
@@ -199,6 +183,8 @@
     </div>
 </div>
 
-
 </body>
+
+<footer th:replace="fragments/footer::footerFragment"></footer>
+
 </html>

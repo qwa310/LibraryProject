@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.midtestlms.domain.Member;
 import com.example.midtestlms.domain.Rental;
@@ -35,6 +36,7 @@ public class RentalService {
 
     
     // 반납하기
+    @Transactional
     public int returnBook(int r_Id) {
     	System.out.println(r_Id);
     	Rental rental = new Rental();
@@ -58,6 +60,7 @@ public class RentalService {
 
 
 	// 대여하기
+    @Transactional
 	public int rentalBook(Member member, String isbn, int b_id) {
 		System.out.println("hihi : "+member.getM_id().intValue());
 		List<Member> memberList = rentalMapper.rentableDate(member.getM_id().intValue());

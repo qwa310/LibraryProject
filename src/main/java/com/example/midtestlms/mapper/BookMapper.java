@@ -69,4 +69,20 @@ public interface BookMapper {
     // 도서 정보 수정
     @Update("update book_info set b_title=#{bookInfoDto.b_title}, c_id=#{bookInfoDto.c_id}, b_publisher=#{bookInfoDto.b_publisher}, b_pdate=#{bookInfoDto.b_pdate}, b_author=#{bookInfoDto.b_author} where isbn=#{bookInfoDto.isbn}")
     void updateBookInfo(@Param("bookInfoDto") BookInfoDto bookInfoDto);
+    
+    // 내 책 정보 조회
+    @Select("select * from book where b_id = #{b_id}")
+	Book findbookById(@Param("b_id") int b_id);
+    
+    @Select("select * from book where isbn = #{isbn}")
+ 	Book findbookByIsbn(@Param("isbn") String isbn);
+    
+    @Select("select * from book_info where isbn = (select isbn from book where b_id = #{book.b_id})")
+	BookSearchInfo findbookinfoById(@Param("book") final Book book);
+    
+    @Select("select isbn from book where b_id = (select b_id from rental_manage where r_id = #{r_id})")
+    String findbookByRid(@Param("r_id") int r_id);
+    
+    @Select("select * from book_info where isbn = #{isbn}")
+    BookSearchInfo findbookinfoByIsbn(@Param("isbn") String isbn);
 }

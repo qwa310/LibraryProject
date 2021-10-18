@@ -21,7 +21,7 @@ public interface RentalMapper {
             "a.rent_date, a.due_return_date, a.return_status, a.ext_num \n" +
             "from lms.rental_manage a\n" +
             "join lms.book_info b on a.isbn = b.isbn\n" +
-            "where m_id = #{member.m_id}")
+            "where m_id = #{member.m_id} order by a.rent_date desc")
     List<Rental> findRental(@Param("member") Member member);
 
     // 책 대여

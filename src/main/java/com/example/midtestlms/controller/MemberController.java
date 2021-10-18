@@ -3,7 +3,10 @@ package com.example.midtestlms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,7 +59,17 @@ public class MemberController {
 	// 로그인 페이지
 	@GetMapping("/member/login")
 	public String login() {
-		return "member/loginForm";
+	   AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
+	   if (trustResolver.isAnonymous(SecurityContextHolder.getContext().getAuthentication())) {
+	      // 익명
+	      System.out.println("익명일 때");
+	      return "member/loginForm";
+	   }
+	   else {
+	      // 로그인한 사용자
+	      System.out.println("이미 로그인 했을 때");
+	      return "redirect:/";
+	   }
 	}
 
 	// 로그인 결과 페이지

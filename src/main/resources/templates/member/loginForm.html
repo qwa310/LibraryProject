@@ -1,47 +1,50 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-	
-	<head>
-	    <meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	    <title>더조니도서관</title>
-	    <link rel="shortcut icon" th:href="@{/css/favicon.ico}">
-	    
-	   <link rel="stylesheet" th:href="@{/css/login.css}">
-	</head>
-	
-	<!-- header.html -->
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>더조니도서관 :: 로그인</title>
+<link rel="shortcut icon" th:href="@{/css/favicon.ico}">
+
+<th:block th:replace="fragments/config::configFragment"></th:block>
+<link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
 	<header th:replace="fragments/header::headerFragment"></header>	
-	
-	<!-- <body layout:fragment="content"> layout.html 사용의 경우 -->
-	<body layout:fragment="content">	
-    
+	<body>		
     <div class="section">
+    <div class="visual"></div>
     	<div class="wrap">
-	    	<div class="title_login">로그인</div>
+	    	<div class="title">
+		    		<div class="login">
+			    		<span>로그인</span>
+		    		</div>
+		    	</div>
     		<div class="welcome">
-    		
-	    		<img th:src="@{/css/images/smile.png}" alt="">
-	    		<span>더조니도서관 방문을 환영합니다.</span>
+    		<div class="tit">로그인</div>
+		    		<div class="smile">
+			    		<img th:src="@{/css/images/smile.png}" alt="">
+		    		</div>
+	    	<div class="greeting">
+			    		<span>더조니도서관 방문을 환영합니다.</span>
+		    		</div>
 	    	<div class="form">
-			    <form th:action="@{/member/login}" method="POST">
-			            <label for="email">Email : </label>
-			            <input type="text" name="email" id="email" ><br>
-			            <label for="pwd">Password : </label>
-			            <input type="password" name="pwd" id="pwd" >
-			        	<button type="submit">로그인</button>
-			    </form>
+					    <form th:action="@{/member/login}" method="POST">
+					    	<div class="input">
+					            <input type="text" name="email" placeholder="이메일(email@example.com)">
+					            <input type="password" name="pwd" placeholder="비밀번호">
+					    	</div>
+					    	<div class="sumit">
+					        	<button type="submit">로그인</button>
+					    	</div>
+					    </form>	
+					</div>	
 	    	</div>
-	    		
+	    		<div class="empty"></div>
     		 </div>
-    	</div>
     </div>
-    </body>
-    
-    <!-- footer.html -->
+</body>
 	<footer th:replace="fragments/footer::footerFragment"></footer>
-	
->>>>>>> 9fd73a08dc762f5f4b0267edae2711c342b07c89
 </html>

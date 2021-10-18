@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.midtestlms.domain.Book;
 import com.example.midtestlms.domain.BookCategory;
@@ -78,5 +79,27 @@ public class BookService {
     public void editBookInfo(BookInfoDto bookInfoDto) {
         bookMapper.updateBookInfo(bookInfoDto);
     }
+    
+ // 내 책 정보 찾기
+    @Transactional
+    public Book findbookById(int b_id) {
+        return bookMapper.findbookById(b_id);
+    } 
+    
+    @Transactional
+    public BookSearchInfo findbookinfoById(Book book) {
+        return bookMapper.findbookinfoById(book);
+    }
+ 
+    public String findbookByRid(int r_id) {
+        return bookMapper.findbookByRid(r_id);
+    }
+    
+    @Transactional
+    public BookSearchInfo findbookinfoByIsbn(String isbn) {
+        return bookMapper.findbookinfoByIsbn(isbn);
+    }
+    
+    
 	
 }

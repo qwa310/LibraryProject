@@ -12,20 +12,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.midtestlms.domain.BookSearchInfo;
 import com.example.midtestlms.domain.Member;
-import com.example.midtestlms.domain.Rental;
+import com.example.midtestlms.domain.Notification;
+import com.example.midtestlms.service.BookService;
 import com.example.midtestlms.service.MemberService;
+import com.example.midtestlms.service.NotificationService;
 import com.example.midtestlms.service.RentalService;
 
 @Controller
 public class RentalController {
 	RentalService rentalService;
 	MemberService memberService;
+	BookService bookService;
+	NotificationService notificationService;
 
 	@Autowired
-	public RentalController(MemberService memberService, RentalService rentalService) {
+	public RentalController(NotificationService notificationService, MemberService memberService, RentalService rentalService,BookService bookService) {
 		this.memberService = memberService;
 		this.rentalService = rentalService;
+		this.bookService = bookService;
+		this.notificationService = notificationService;
 	}
 
 	@RequestMapping(value = "/member/rental", method = { RequestMethod.GET, RequestMethod.POST })
@@ -62,16 +69,41 @@ public class RentalController {
 
 	@PostMapping("/book/rental/return")
 	public String returnBook(@AuthenticationPrincipal User user, @RequestParam("r_id") int r_id, Model model) {
-		// r_id 를 이용하여 책 대여 연장
+		// r_id 를 이용하여 책 반납
 		Member member = memberService.findMember(user.getUsername());
 		System.out.println("extension" + r_id);
 		int result = rentalService.returnBook(r_id);
 		if (result < 0) {
 			System.out.println("반납 실패");
 		}
+		String isbn = bookService.findbookByRid(r_id);
+    	BookSearchInfo bookInfo = bookService.findbookinfoByIsbn(isbn);
+    	// 재고 확인 후 이메일 전송
+    	int book_status = notificationService.bookStatus(isbn);
+    	List<Notification> notification = notificationService.checkNotifiation(isbn);
+    	model.addAttribute("notification", notification);
 		model.addAttribute("member", member);
+    	if(book_status == 1) {
+    		model.addAttribute("notification", notification);
+    		model.addAttribute("member", member);
+//    		List<Notification> emailList = notificationService.add_email(notification, bookInfo, member);
+//    		model.addAttribute("emailList", emailList);
+//    		model.addAttribute("book_status", book_status);
+        	System.out.println("메일 전송 준비 완료");
+//        	notificationService.go_email();
+        	return "notification/email";
+    	}
+    	else {
+			return "redirect:/member/info";
+    	}
+    
+	}
+
+	@PostMapping("/notification/email")
+	public String goEmails() {
 		return "redirect:/member/info";
 	}
+	
 
 	@PostMapping("/book/rental")
 	public String rentalBook(@AuthenticationPrincipal User user, 
@@ -88,5 +120,7 @@ public class RentalController {
 		
 		return "redirect:/";
 	}
+	
+	 
 
 }

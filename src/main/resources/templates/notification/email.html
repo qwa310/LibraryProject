@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>알람 신청</title>
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	emailjs.init("user_xOiQpkRaJHmjECSPWnyTX");
+    	$('#alarm').on('click', function(){
+	    	var templateParams = {
+	    	email: $('input[name=user_email]').val()};
+/* 	    	name: $('input[name=user_name]').val(),
+	    	title: $('input[name=book_title]').val()}; */
+	    	
+	    	emailjs.send('service_x6j9axp', 'template_9eguio9', templateParams,"user_xOiQpkRaJHmjECSPWnyTX").then(
+	    			function(response){
+	    				console.log('SUCCESS!!', response.status, response.text);
+	    			}, function(error){
+	    				console.log('FAILED...', error);
+	    			});
+	    	});
+    	
+    	$('#alarm').trigger('click');
+    });
+    console.log('메일 전송 완료');
+    </script>
+    
+</head>
+<body>
+<form th:action="@{/notification/email}" method="POST">
+<div th:each="notification : ${notification}">
+	<input type="text" hidden="true" name="user_email" th:value="${notification.email}">
+	<!-- <input type="text" hidden="true" name="user_name" th:value="${emailList.name}">
+	<input type="text" hidden="true" name="book_title" th:value="${emailList.b_title}"> -->
+	<input type="submit" id="alarm" hidden="true">
+</div>
+</form>
+</body>
+</html>
