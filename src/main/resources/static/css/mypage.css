@@ -1,12 +1,232 @@
-body{
-    margin-top: 50px;
-    font-family: 'Trebuchet MS', serif;
-    line-height: 1.6
+@charset "EUC-KR";
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+.logo{
+	float: left;
+    transform: translate(0, 10px);
+    position: relative;
+}
+.logo .img{
+	float: left;
+}
+.logo .img img{
+	width: 50px;
+	display:block;
+}
+.logo .title{
+	float: left;
+    font-family: 'Do Hyeon', sans-serif;
+    line-height: 50px;
+    font-size: 30px;
+    margin-left: 15px;
+}
+/* 서브 메뉴 */
+.sub_menu{
+	height: 40px;
+    background: #3b3e49;	
+}
+.sub_menu .blue, .sub_menu .purple{
+	width:185px;
+	height:100%;
+	float: left;
+	line-height: 40px;
+	text-align: center;
+	color: #ffffff;
+}
+.sub_menu .blue{
+	background: #363b9e;
+}
+.sub_menu .purple{
+	background: #840093;
+}
+.main_menu{
+	width: 100%;
+  	height: 70px;
+  	background-color: #ffffff;
+}
+.main_menu .right{
+	float: left;
+    height: 100%;
+    margin-left: 10%;
+}
+.main_menu .right div a{
+	color: black;
+    line-height: 70px;
+    margin: 0 6rem;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.login, .sign_in, .my_douzony{
+	float:left;
+	height: 100%;
+}
+.tape{
+	width: 100%;
+	height: 4px;
+	background: rgb(9,9,121);
+	background: linear-gradient(90deg, rgba(9,9,121,1) 19%, rgba(61,255,0,0.7570378493194152) 56%, rgba(0,212,255,1) 93%);
+}
+input::placeholder {
+  color: #dddddd;
+}
+.wrap{
+	width:1200px;
+	margin: 0 auto;
+	position: static;
+}
+.section{
+	width: 100%;
+	position: relative;
+}
+.section .wrap{
+	width:1200px;
+	margin: 0 auto;
+	position: relative;
+}
+.section .wrap .title{
+	width: 240px;
+	height: 240px;
+	background-color: #124ea2;
+	top: 50px;
+    position: absolute;
+ 
+}
+.section .wrap .title .login{
+	width: 100%;
+    position: relative;
+    background: #124ea2 url(https://library.busan.go.kr/resources/common/img/lnb_bg.png) no-repeat center center;
+    background-size: cover;
+    font-weight: bold;
+    
+}
+.section .wrap .title .login span{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #ffffff;
+    font-size: 30px;
+}
+.welcome .smile{
+	text-align: center;	
+}
+.welcome .greeting{
+	width: 400px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 25px;
+	margin-bottom: 40px;
+	/*font-family: 'Do Hyeon', sans-serif;*/
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#tab-1 form{
+	width: 400px;
+	margin: 0 auto;
+}
+
+input input{
+    width: 100%;
+    padding-left: 15px;
+    height: 50px;
+    box-sizing: border-box;
+    font-size: 25px;
+}
+input::placeholder {
+  font-size: 15px;
+   padding: 5px;
+  opacity: 1; /* 파이어폭스에서 뿌옇게 나오는 현상을 방지하기 위한 css */
+}
+sumit{
+	float: left;
+	width: 25%;
+	
+}
+sumit button{
+	width: 100%;
+    border: 0;
+    outline: 0;
+    background-color: #124ea2;
+    height: 100px;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+	
+}
+
+  .selectBox {
+    position: absolute;
+    width: 96px;
+    top: 50%;
+    left: 15%;
+    height: 65px;
+    border-radius: 4px;
+    transform: translate(50px, -50%);
+    border: 2px solid #ffffff;
+}
+.selectBox .select {
+  height: inherit;
+  background: transparent;
+  border: 0 none;
+  outline: 0 none;
+  padding: 0 10px;
+  position: relative;
+  font-size: 16px;
+  z-index: 3; 
+  color: #ffffff;
+}
+
+.selectBox .icoArrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 35px;
+  height: inherit;
+  border-left: 2px solid #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contents{
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+.selectBox .icoArrow img {
+  width: 50%;
+  transition: .3s; 
+}
+.contents .img{
+	    width: 300px;
+    margin: 0 auto;
+}
+.contents .img img{
+	width: 100%;
+}
+.section {
+    width: 100%;
+    /* position: relative; */
+    height: 1000px;
+}
+.selectBox .select:focus + .icoArrow img {
+  transform: rotate(180deg);
+}
+
+.sub_menu .wrap .right{
+	float: right;
+ 
+}
+.sub_menu .wrap .right ul{
+	float: left;
+}
+
+.sub_menu .wrap .right ul a{
+	color: white;
+	text-decoration: none;
 }
 
 table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
 }
 
 .container{
@@ -14,6 +234,44 @@ table, th, td {
     margin: 0 auto;
 }
 
+.container{
+	width: 700px;
+    margin: 0 auto;
+}
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	background: #ededed;
+	color: #222;
+}
+
+.tab-content{
+	display: none;
+	background: #ededed;
+	padding: 15px;
+}
+
+.tab-content.current{
+	display: inherit;
+    overflow: scroll;
+    width: 700px;
+    height: 400px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+    overflow-x: hidden;
+}
 ul.tabs{
     margin: 0px;
     padding: 0px;
@@ -22,24 +280,75 @@ ul.tabs{
 
 ul.tabs li{
     background: none;
-    color: #222;
     display: inline-block;
     padding: 10px 15px;
     cursor: pointer;
 }
 
-ul.tabs li.current{
-    background: #ededed;
-    color: #222;
+.title_menu .menus span{
+	padding: 12px 20px 10px 15px;
+	display: block;
+
+}
+#tab-content .form{
+	width: 400px;
+	margin: 0 auto;
+}
+#tab-content .form input{
+	outline: none;
+    border: 0.5px solid #eaeaea;
+
 }
 
-.tab-content{
-    display: none;
-    background: #ededed;
-    padding: 15px;
-    height: 500px;
+.input input{
+    width: 100%;
+    padding-left: 15px;
+    height: 50px;
+    box-sizing: border-box;
+    font-size: 25px;
 }
-
-.tab-content.current{
-    display: inherit;
+.input input::placeholder {
+  font-size: 15px;
+   padding: 5px;
+  opacity: 1; /* 파이어폭스에서 뿌옇게 나오는 현상을 방지하기 위한 css */
+}
+.sumit{
+	float: left;
+	width: 25%;
+	
+}
+.sumit button{
+	width: 100%;
+    border: 0;
+    outline: 0;
+    background-color: #124ea2;
+    height: 100px;
+    color: #ffffff;
+    font-size: 20px;
+	
+}
+form span{
+	font-size: 20px;
+    margin-bottom: 10px;
+    display: block;
+}
+form input{
+	height: 50px;
+    width: 100%;
+    outline: none;
+    border: 1px solid #eaeaea;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    box-sizing: border-box;
+    font-size: 25px;
+}
+form button {
+	    width: 100%;
+    border: 0;
+    outline: 0;
+    background-color: #124ea2;
+    height: 60px;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
 }

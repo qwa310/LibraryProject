@@ -25,7 +25,10 @@
 			<div th:text="${bList.isbn}"></div>
 			<div th:text="${bList.b_status} == 0 ? 가능 : 불가"></div>
 			<button>알림</button>	
-			<button>대출하기</button>	
+			<form th:action="@{/book/rental}" method="POST">
+				<input type="hidden" name="m_id" th:value="${member.m_id}">
+				<input type="submit" value="대출하기">
+			</form>
 		</div>
 	</div>
 	

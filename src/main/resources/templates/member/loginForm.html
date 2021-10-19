@@ -1,21 +1,50 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8">
-    <title>Library Management System</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>더조니도서관 :: 로그인</title>
+<link rel="shortcut icon" th:href="@{/css/favicon.ico}">
+
+<th:block th:replace="fragments/config::configFragment"></th:block>
+<link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
-<body>
-    <h1>로그인</h1>
-    <form th:action="@{/member/login}" method="POST">
-        <div>
-            <label for="email">Email : </label>
-            <input type="text" name="email" id="email" ><br>
-            <label for="pwd">Password : </label>
-            <input type="password" name="pwd" id="pwd" ><br>
-<!--            <label for="remember-me">로그인 유지</label>-->
-<!--            <input type="checkbox" name="remember-me" id="remember-me" >-->
-        </div>
-        <button type="submit">등록</button>
-    </form>
+	<header th:replace="fragments/header::headerFragment"></header>	
+	<body>		
+    <div class="section">
+    <div class="visual"></div>
+    	<div class="wrap">
+	    	<div class="title">
+		    		<div class="login">
+			    		<span>로그인</span>
+		    		</div>
+		    	</div>
+    		<div class="welcome">
+    		<div class="tit">로그인</div>
+		    		<div class="smile">
+			    		<img th:src="@{/css/images/smile.png}" alt="">
+		    		</div>
+	    	<div class="greeting">
+			    		<span>더조니도서관 방문을 환영합니다.</span>
+		    		</div>
+	    	<div class="form">
+					    <form th:action="@{/member/login}" method="POST">
+					    	<div class="input">
+					            <input type="text" name="email" placeholder="이메일(email@example.com)">
+					            <input type="password" name="pwd" placeholder="비밀번호">
+					    	</div>
+					    	<div class="sumit">
+					        	<button type="submit">로그인</button>
+					    	</div>
+					    </form>	
+					</div>	
+	    	</div>
+	    		<div class="empty"></div>
+    		 </div>
+    </div>
 </body>
+	<footer th:replace="fragments/footer::footerFragment"></footer>
 </html>

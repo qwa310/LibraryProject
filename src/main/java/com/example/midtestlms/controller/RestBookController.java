@@ -44,14 +44,7 @@ public class RestBookController {
 	@GetMapping("/bookDetail/{isbn}")
 	public ResponseEntity<Object> showBookDetail(@PathVariable String isbn) {
 		List<Book> bDetail = service.bookDetailList(isbn);
-		
 		return ResponseEntity.ok(bDetail);
-	}
-
-	@PostMapping("/extensionBook/")
-	public ResponseEntity<Object> extensionBook(@RequestBody int r_id) {
-		int extension = service.extensionBook(r_id);
-		return ResponseEntity.ok(extension);
 	}
 	
 }
