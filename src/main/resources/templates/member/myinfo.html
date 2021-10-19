@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/mypage.css/}" rel="stylesheet" type="text/css" media="screen">
-    <title>Admin Page</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  <!-- jquery library 임포트 -->
+    <title>더조니도서관 :: 마이서재</title>
+    <link rel="shortcut icon" th:href="@{/css/favicon.ico}">
+    <th:block th:replace="fragments/config::configFragment"></th:block>
     <script type="text/javascript" th:src="@{/js/mypage.js/}"></script>
 </head>
+<header th:replace="fragments/header::headerFragment"></header>
+
 <body>
-<h1>JSTL MyPage</h1>
+<body>
+
 <div class="container">
     <ul class="tabs">
         <li class="tab-link current" data-tab="tab-1">회원정보수정</li>
@@ -30,7 +34,7 @@
             <label>휴대폰번호:</label>
             <input type="text" name="myPhone" th:value="${myinfo.phone}"><br>
 
-            <input type="submit" value="정보수정" >
+            <input type="submit" value="정보수정" style="background-color:#363b9e;color:#fff;">
         </form>
     </div>
     <div id="tab-2" class="tab-content">
@@ -78,18 +82,26 @@
                 <td name="due_return_date" th:text="${rantal_table.due_return_date}">
 
                 </td>
-                <td name="return_status" th:text="${rantal_table.return_status}">
+                <td>
+                 <div th:text="${rantal_table.return_status} == 0 ? '대여중' : '반납완료'"></div>
 
                 </td>
                 <td>
+                
                     <div th:if="${rantal_table.return_status} == 0">
-                        <button>반납신청</button>
+                        <form th:action="@{/book/rental/return}" th:method="post">
+                                <input type="text" hidden="true" name="r_id" th:value="${rantal_table.r_id}">
+                                <input type="submit" value="반납신청" onclick="returnBook();">
+                        </form>
                     </div>
                 </td>
                 <td>
                     <div th:if="${rantal_table.return_status} == 0">
-                        <div th:if="${rantal_table.ext_num} <= 3">
-                            <button>연장신청</button>
+                        <div th:if="${rantal_table.ext_num} < 3">
+                            <form th:action="@{/book/rental/extension}" th:method="post">
+                                <input type="text" hidden="true" name="r_id" th:value="${rantal_table.r_id}">
+                                <input type="submit" value="연장신청" onclick="rentalExtension();">
+                            </form>
                         </div>
                     </div>
                 </td>
@@ -125,7 +137,7 @@
                 <td th:text="${overdue_table.b_title}">
 
                 </td>
-                <td th:text="${overdue_table.c_id}">
+                <td th:text="${overdue_table.c_name}">
 
                 </td>
                 <td th:text="${overdue_table.b_author}">
@@ -144,16 +156,12 @@
         <table>
             <tr>
                 <th>idx</th>
-                <th>책id</th>
                 <th>ISBN</th>
                 <th>제목</th>
                 <th>알람 전송 여부</th>
             </tr>
             <tr th:each="notification_table : ${notificationList}">
                 <td th:text="${notification_table.n_id}">
-
-                </td>
-                <td th:text="${notification_table.b_id}">
 
                 </td>
                 <td th:text="${notification_table.isbn}">
@@ -175,6 +183,8 @@
     </div>
 </div>
 
-
 </body>
+
+<footer th:replace="fragments/footer::footerFragment"></footer>
+
 </html>

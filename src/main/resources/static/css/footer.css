@@ -1,0 +1,44 @@
+@charset "EUC-KR";
+
+/*
+2021.10.14 Thu
+Lee woo ju
+*/
+
+.empty{
+	height: 200px;
+}
+.footer{
+	
+	height: 150px;
+	background-color: #3b3e49;
+}
+.top_foo{
+	width:100%;
+	height:50px;
+	line-height: 50px;
+	border-bottom: 1px solid #5b5d66;
+}
+.bot_foo{
+	padding: 20px;
+	padding-bottom: 0;
+	line-height: 30px;
+}
+
+.wrap {
+    width: 1200px;
+    margin: 0 auto;
+    position: static;
+}
+.footer .top_foo .wrap span{
+	color: white;
+	font-size: 14px;
+	margin: 0 0.5rem;
+}
+.footer .bot_foo .wrap span{
+	font-size: 14px;
+	margin: 0 0.5rem;
+	color: #AAADBA;
+	display: block;
+}
+ 

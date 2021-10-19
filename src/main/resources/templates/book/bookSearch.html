@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>더조니도서관 :: 자료검색</title>
+	<link rel="shortcut icon" th:href="@{/css/favicon.ico}">
+	<!-- config.html -->
+	<th:block th:replace="fragments/config::configFragment"></th:block>
+<link rel="stylesheet" th:href="@{/css/booksearch.css}">
+</head>
+<header th:replace="fragments/header::headerFragment"></header>
+<body>
+
+	<body>
+		<div class="section">
+			<div class="wrap">
+				<div class="title">
+					<div class="login"><span>자료검색</span></div>
+				</div>
+				<div class="tit">자료검색</div>
+			  	<div class="search_zone">
+		    		<div class="search">
+		    			<span id="search"></span>
+		    			<div id = "searchBtn" class="selectBox">
+						    <select id="bookcon" name="bookcon" class="select">
+			   					<option value="b_title">제목</option>
+			    				<option value="b_author">글쓴이</option>
+			    				<option value="b_publisher">출판사</option>
+						    </select>
+						</div>
+		    			<input type="text" class="a">			
+		    			<a id="a"><img th:src="@{/css/images/icon.png}" alt=""></a>
+		    		</div>
+			   	</div>
+			   	<div id="searchBookList">
+			   		<div id = "firstTable" th:if="${bookList.size} > 0" >
+						<div class="table1">
+							<div class="th">장르</div>
+							<div class="th">제목</div>
+							<div class="th">글쓴이</div>
+							<div class="th">출판사</div>
+						</div>
+						<div th:each="book : ${bookList}" class="table2">
+							<a th:href="@{/book/bookDetail(isbn=${book.isbn})}">
+								<span th:text="${book.c_name}"></span>
+								<span th:text="${book.b_title}"></span>
+								<span th:text="${book.b_author}"></span>
+								<span th:text="${book.b_publisher}"></span>
+							</a>
+						</div>
+						</div>
+				</div>
+			</div>
+		</div>
+		<div th:if="${bookList.size} == 0">
+			<div id = "firstList">
+				<h1>검색결과가 없습니다.</h1>
+			</div>
+		</div>
+	<script type="text/javascript" th:src="@{/js/bookSearch.js/}"></script>
+	</body>
+	<footer th:replace="fragments/footer::footerFragment"></footer>
+</html>

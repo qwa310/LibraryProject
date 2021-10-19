@@ -20,6 +20,7 @@ public class Rental {
     private String b_title;
     private String b_author;
     private String b_publisher;
+    private String rentable_date;
     private int cnt_date;
 
     @Builder

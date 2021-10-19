@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Management System</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>도서 재고 및 대출 현황</h1>
+<h2 th:text="'도서 명 : ' + ${b_title}"></h2>
+<h2 th:text="'ISBN : ' + ${isbn}"></h2>
+
+<!--<h2 sec:authorize="hasRole('ROLE_MEMBER')" th:if="${cnt_bStatus_false==5}">-->
+<!--    <form th:action="@{/member/req_notification}" method="POST">-->
+<!--        <input type="hidden" th:value="${isbn}" name="isbn">-->
+<!--        <input th:type="submit" value="알림 신청"/>-->
+<!--    </form>-->
+<!--</h2>-->
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>책 고유 ID</th>
+                <th>상태</th>
+<!--                <th sec:authorize="hasRole('ROLE_MEMBER')">대출 신청</th>-->
+                <th sec:authorize="hasRole('ROLE_ADMIN')">대출자</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.b_id}"></td>
+            <td th:if="${book.b_status}==1">
+                <span>대출 가능</span>
+            </td>
+            <td th:unless="${book.b_status}==1">
+                <span>대출 중</span>
+            </td>
+<!--            <td sec:authorize="hasRole('ROLE_MEMBER')" th:if="${book.b_status}==1">-->
+<!--&lt;!&ndash;                <a th:href="@{/member/req_rental_book}">대출 신청</a>&ndash;&gt;-->
+<!--                <form th:action="@{/member/req_rental_book}" th:method="POST">-->
+<!--&lt;!&ndash;                    <input type="hidden" th:field="*{blogId}" id="blogId" >&ndash;&gt;-->
+<!--                    <input th:type="submit" value="대출 신청"/>-->
+<!--                </form>-->
+<!--            </td>-->
+<!--            <td sec:authorize="hasRole('ROLE_MEMBER')" th:unless="${book.b_status}==1">-->
+<!--                <span>불가</span>-->
+<!--            </td>-->
+            <td sec:authorize="hasRole('ROLE_ADMIN')">
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<a th:href="@{/admin/book-manage}">돌아가기</a>
+</body>
+</html>
