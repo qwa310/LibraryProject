@@ -1,0 +1,97 @@
+create schema lms;
+use lms;
+
+CREATE TABLE `lms`.`book_info` (
+  `isbn` VARCHAR(255) NOT NULL,
+  `b_title` VARCHAR(100) NULL,
+  `c_id` BIGINT NOT NULL,
+  `b_publisher` VARCHAR(50) NULL,
+  `b_pdate` DATE NULL,
+  `b_author` VARCHAR(50) NULL,
+  PRIMARY KEY (`isbn`),
+  CONSTRAINT `c_id`
+    FOREIGN KEY (`c_id`)
+    REFERENCES `lms`.`book_category` (`c_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+CREATE TABLE `lms`.`book_category` (
+  `c_id` BIGINT NOT NULL auto_increment,
+  `c_name` VARCHAR(25) NOT NULL unique,
+  PRIMARY KEY (`c_id`)
+);
+
+CREATE TABLE `lms`.`book` (
+  `b_id` BIGINT NOT NULL auto_increment,
+  `isbn` VARCHAR(255) NOT NULL,
+  `b_status` TINYINT(1) NULL DEFAULT 1,
+  PRIMARY KEY (`b_id`),
+    FOREIGN KEY (`isbn`)
+    REFERENCES `lms`.`book_info` (`isbn`)
+);
+
+CREATE TABLE member
+(
+    m_id BIGINT auto_increment primary key,
+    email VARCHAR(50) NOT NULL,
+    pwd VARCHAR(100) NOT NULL,
+    pid VARCHAR(13) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    auth VARCHAR(20) NOT NULL DEFAULT 'USER',
+    rentable_date DATE DEFAULT NULL,
+    constraint member_email_uindex
+        unique (email),
+    constraint member_phone_uindex
+        unique (phone),
+    constraint member_pid_uindex
+        unique (pid)
+);
+
+CREATE TABLE `lms`.`rental_manage` (
+  `r_id` BIGINT NOT NULL auto_increment,
+  `b_id` BIGINT NOT NULL,
+  `m_id` BIGINT NOT NULL,
+  `isbn` VARCHAR(255) NOT NULL,
+  `rent_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `cnt_date` INT DEFAULT 0,
+  `return_status` TINYINT(1) DEFAULT 0,
+  `ext_num` INT DEFAULT 0,
+  `due_return_date` DATETIME DEFAULT NULL,
+  `real_return_date` DATETIME DEFAULT NULL,
+  PRIMARY KEY (`r_id`),
+  CONSTRAINT `b_id`
+    FOREIGN KEY (`b_id`)
+    REFERENCES `lms`.`book` (`b_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `isbn`
+    FOREIGN KEY (`isbn`)
+    REFERENCES `lms`.`book` ('isbn`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `m_id`
+    FOREIGN KEY (`m_id`)
+    REFERENCES `lms`.`member` (`m_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+CREATE TABLE `lms`.`notification` (
+  `n_id` BIGINT NOT NULL auto_increment,
+  `isbn` VARCHAR(255) NOT NULL,
+  `m_id` BIGINT NOT NULL,
+  `apply_date` DATETIME DATETIME CURRENT_TIMESTAMP,
+  `resp_date` DATETIME DATETIME NULL,
+  PRIMARY KEY (`n_id`),
+  CONSTRAINT `noti_b`
+    FOREIGN KEY (`isbn`)
+    REFERENCES `lms`.`book` ('isbn`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `noti_m`
+    FOREIGN KEY (`m_id`)
+    REFERENCES `lms`.`member` (`m_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
