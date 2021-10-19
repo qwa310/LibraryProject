@@ -14,9 +14,10 @@ public class Member {
     private String phone;
     private String rentable_date;
     private String auth;
+    private int member_status;
 
     @Builder
-    public Member(Long m_id, String email, String pwd, String name, String pid, String phone, String rentable_date, String auth) {
+    public Member(int member_status,Long m_id, String email, String pwd, String name, String pid, String phone, String rentable_date, String auth) {
         this.m_id = m_id;
         this.email = email;
         this.pwd = pwd;
@@ -25,6 +26,7 @@ public class Member {
         this.phone = phone;
         this.rentable_date = rentable_date;
         this.auth = auth;
+        this.member_status = member_status;
     }
 //    @Builder
 //    public Member(String pwd, String phone) {

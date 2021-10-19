@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Management System</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>관리자 페이지</h1>
+<h2>도서 정보 수정</h2>
+<h2 th:text="'ISBN : ' + ${book.isbn}"></h2>
+<br>
+<form th:action="@{/admin/book-manage/edit}" method="POST" id="bookEditForm">
+    <div>
+<!--        <label for="isbn">ISBN : </label>-->
+        <input th:type="text" name="isbn" id="isbn" th:value="${book.isbn}" hidden><br>
+        <label for="b_title">제목 : </label>
+        <input th:type="text" name="b_title" id="b_title" th:value="${book.b_title}"><br>
+        <label for="c_id">카테고리 : </label>
+        <select name="c_id" form="bookEditForm" id="c_id">
+            <option value=1>문학</option>
+            <option value=2>SF</option>
+            <option value=3>예술</option>
+            <option value=4>역사</option>
+            <option value=5>과학</option>
+        </select><br>
+        <label for="b_publisher">출판사 : </label>
+        <input type="text" name="b_publisher" id="b_publisher" th:value="${book.b_publisher}"><br>
+        <label for="b_pdate">발행날짜 : </label>
+        <input type="date" name="b_pdate" id="b_pdate" th:value="${book.b_pdate}"><br>
+        <label for="b_author">저자 : </label>
+        <input type="text" name="b_author" id="b_author" th:value="${book.b_author}"><br>
+    </div>
+    <button type="submit">등록</button></br>
+    <br>
+    <a th:href="@{/admin/book-manage}">도서 목록으로 돌아가기</a>
+</form>
+</body>
+</html>

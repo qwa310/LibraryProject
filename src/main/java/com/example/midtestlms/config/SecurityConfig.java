@@ -39,7 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 // 페이지 권한 설정
-                .antMatchers("/admin/**").hasRole("ADMIN")      // '/admin'으로 시작하는 url은 admin만 접근 가능하도록
+                .antMatchers("/admin/**").hasRole("ADMIN")     // '/admin'으로 시작하는 url은 admin만 접근 가능하도록
+                .antMatchers("/book/**").permitAll()
                 .antMatchers("/member/new").permitAll()
                 .antMatchers("/member/login").permitAll()
                 .antMatchers("/member/**").hasRole("MEMBER")    // '/member'로 시작하는 url은 member만 접근 가능하도록

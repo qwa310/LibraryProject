@@ -1,0 +1,237 @@
+@charset "EUC-KR";
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+/*
+2021.10.15 Fri
+Lee woo ju
+*/
+
+.logo{
+	float: left;
+    transform: translate(0, 10px);
+    position: relative;
+}
+.visual{
+	background: url("https://library.busan.go.kr/resources/common/img/subBg.jpg");
+	width: 100%;
+	height: 185px
+}
+.logo .img{
+	float: left;
+}
+.logo .img img{
+	width: 50px;
+	display:block;
+}
+.logo .title{
+	float: left;
+    font-family: 'Do Hyeon', sans-serif;
+    line-height: 50px;
+    font-size: 30px;
+    margin-left: 15px;
+}
+/* 서브 메뉴 */
+.sub_menu{
+	height: 40px;
+    background: #3b3e49;	
+}
+.sub_menu .blue, .sub_menu .purple{
+	width:185px;
+	height:100%;
+	float: left;
+	line-height: 40px;
+	text-align: center;
+	color: #ffffff;
+}
+.sub_menu .blue{
+	background: #363b9e;
+}
+.sub_menu .purple{
+	background: #840093;
+}
+.main_menu{
+	width: 100%;
+  	height: 70px;
+  	background-color: #ffffff;
+}
+.main_menu .right{
+	float: left;
+    height: 100%;
+    margin-left: 10%;
+}
+.main_menu .right div a{
+	color: black;
+    line-height: 70px;
+    margin: 0 6rem;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.login, .sign_in, .my_douzony{
+	float:left;
+	height: 100%;
+}
+.tape{
+	width: 100%;
+	height: 4px;
+	background: rgb(9,9,121);
+	background: linear-gradient(90deg, rgba(9,9,121,1) 19%, rgba(61,255,0,0.7570378493194152) 56%, rgba(0,212,255,1) 93%);
+}
+input::placeholder {
+  color: #dddddd;
+}
+.wrap{
+	width:1200px;
+	margin: 0 auto;
+	position: static;
+}
+.section{
+	width: 100%;
+	position: relative;
+}
+.section .wrap{
+	width:1200px;
+	margin: 0 auto;
+	position: relative;
+}
+.section .wrap .title{
+	    width: 240px;
+    height: 240px;
+    background-color: #124ea2;
+    top: -100px;
+    position: absolute;
+ 
+}
+.section .wrap .title .login{
+	width: 100%;
+    position: relative;
+    background: #124ea2 url(https://library.busan.go.kr/resources/common/img/lnb_bg.png) no-repeat center center;
+    background-size: cover;
+    font-weight: bold;
+}
+.section .wrap .title .login span{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #ffffff;
+    font-size: 30px;
+}
+.welcome .tit{
+	padding-left: 280px;
+    font-size: 28px;
+    margin: 20px 0;
+}
+.welcome .smile{
+	text-align: center;	
+}
+.welcome .greeting{
+	width: 400px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 25px;
+	margin-bottom: 40px;
+	/*font-family: 'Do Hyeon', sans-serif;*/
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.welcome .form{
+	width: 400px;
+	margin: 0 auto;
+}
+.welcome .form input{
+	outline: none;
+    border: 0.5px solid #eaeaea;
+
+}
+.input, .sumit{
+	float: left;
+	
+}
+.input{
+	float: left;
+	width: 75%;
+}
+.input input{
+    width: 100%;
+    padding-left: 15px;
+    height: 50px;
+    box-sizing: border-box;
+    font-size: 25px;
+}
+.input input::placeholder {
+  font-size: 15px;
+   padding: 5px;
+  opacity: 1; /* 파이어폭스에서 뿌옇게 나오는 현상을 방지하기 위한 css */
+}
+.sumit{
+	float: left;
+	width: 25%;
+	
+}
+.sumit button{
+	width: 100%;
+    border: 0;
+    outline: 0;
+    background-color: #124ea2;
+    height: 100px;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+	
+}
+
+  .selectBox {
+    position: absolute;
+    width: 96px;
+    top: 50%;
+    left: 15%;
+    height: 65px;
+    border-radius: 4px;
+    transform: translate(50px, -50%);
+    border: 2px solid #ffffff;
+}
+.selectBox .select {
+  height: inherit;
+  background: transparent;
+  border: 0 none;
+  outline: 0 none;
+  padding: 0 10px;
+  position: relative;
+  font-size: 16px;
+  z-index: 3; 
+  color: #ffffff;
+}
+
+.selectBox .icoArrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 35px;
+  height: inherit;
+  border-left: 2px solid #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selectBox .icoArrow img {
+  width: 50%;
+  transition: .3s; 
+}
+
+.selectBox .select:focus + .icoArrow img {
+  transform: rotate(180deg);
+}
+
+.sub_menu .wrap .right{
+	float: right;
+ 
+}
+.sub_menu .wrap .right ul{
+	float: left;
+}
+
+.sub_menu .wrap .right ul a{
+	color: white;
+	text-decoration: none;
+}
